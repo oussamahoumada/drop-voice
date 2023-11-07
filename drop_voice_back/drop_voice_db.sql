@@ -11,7 +11,7 @@ CREATE TABLE `drop` (
   `title` varchar(255),
   `date` date,
   `ref_user` int,
-  `ref_adress` int
+  `ref_precise_adress` int
 );
 
 CREATE TABLE `theme` (
@@ -28,12 +28,12 @@ Table "precise_adress" {
   "precise_adress_id" integer [pk]
   "lang" decimal
   "lat" decimal
-  "ref_adress_rel" integer
+  "ref_adress" integer
 }
 
 ALTER TABLE `drop` ADD FOREIGN KEY (`ref_user`) REFERENCES `user` (`user_id`);
-ALTER TABLE `drop` ADD FOREIGN KEY (`ref_adress`) REFERENCES `adress` (`adress_id`);
-ALTER TABLE `precise_adress` ADD FOREIGN KEY (`ref_adress_rel`) REFERENCES `adress` (`adress_id`);
+ALTER TABLE `drop` ADD FOREIGN KEY (`ref_precise_adress`) REFERENCES `precise_adress` (`precise_adress_id`);
+ALTER TABLE `precise_adress` ADD FOREIGN KEY (`ref_adress`) REFERENCES `adress` (`adress_id`);
 
 CREATE TABLE `drop_theme` (
   `drop_theme_id` integer PRIMARY KEY,
