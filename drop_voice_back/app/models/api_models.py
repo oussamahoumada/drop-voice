@@ -5,6 +5,7 @@ drop_model = api.model("drop",{
     'title' : fields.String,
     'image_url' : fields.String,
     'audio_url' : fields.String,
+    'date' : fields.Date,
 })
 
 user_model = api.model("user",{

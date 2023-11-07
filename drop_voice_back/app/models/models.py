@@ -11,6 +11,7 @@ class drop(db.Model):
     audio_url = db.Column(db.String(250))
     title = db.Column(db.String(250))
     type = db.Column(db.String(250))
+    date = db.Column(db.Date)
 
 class theme(db.Model):
     drop_id = db.Column(db.Integer, primary_key=True)

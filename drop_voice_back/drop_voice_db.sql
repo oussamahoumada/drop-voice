@@ -9,6 +9,7 @@ CREATE TABLE `drop` (
   `image_url` varchar(255),
   `audio_url` varchar(255),
   `title` varchar(255),
+  `date` date,
   `ref_user` int,
   `ref_adress` int
 );
