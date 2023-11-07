@@ -24,8 +24,16 @@ CREATE TABLE `adress` (
   `location` varchar(255)
 );
 
+Table "precise_adress" {
+  "precise_adress_id" integer [pk]
+  "lang" decimal
+  "lat" decimal
+  "ref_adress_rel" integer
+}
+
 ALTER TABLE `drop` ADD FOREIGN KEY (`ref_user`) REFERENCES `user` (`user_id`);
 ALTER TABLE `drop` ADD FOREIGN KEY (`ref_adress`) REFERENCES `adress` (`adress_id`);
+ALTER TABLE `precise_adress` ADD FOREIGN KEY (`ref_adress_rel`) REFERENCES `adress` (`adress_id`);
 
 CREATE TABLE `drop_theme` (
   `drop_theme_id` integer PRIMARY KEY,
