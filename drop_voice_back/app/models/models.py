@@ -7,7 +7,8 @@ class user(db.Model):
 
 class drop(db.Model):
     drop_id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(250))
+    image_url = db.Column(db.String(250))
+    audio_url = db.Column(db.String(250))
     title = db.Column(db.String(250))
     type = db.Column(db.String(250))
 

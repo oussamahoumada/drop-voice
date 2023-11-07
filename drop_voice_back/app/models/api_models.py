@@ -2,9 +2,9 @@ from ..extensions import api
 from flask_restx import fields
 
 drop_model = api.model("drop",{
-    'url' : fields.String,
     'title' : fields.String,
-    'type' : fields.Date,
+    'image_url' : fields.String,
+    'audio_url' : fields.String,
 })
 
 user_model = api.model("user",{
@@ -12,10 +12,10 @@ user_model = api.model("user",{
     'mail' : fields.String,
 })
 
-theme_model = api.model("drop",{
+theme_model = api.model("theme",{
     'libelle' : fields.String,
 })
 
-theme_model = api.model("drop",{
+adress_model = api.model("adress",{
     'location' : fields.String,
 })

@@ -6,9 +6,9 @@ CREATE TABLE `user` (
 
 CREATE TABLE `drop` (
   `drop_id` integer PRIMARY KEY,
-  `url` varchar(255),
+  `image_url` varchar(255),
+  `audio_url` varchar(255),
   `title` varchar(255),
-  `type` varchar(255),
   `ref_user` int,
   `ref_adress` int
 );
