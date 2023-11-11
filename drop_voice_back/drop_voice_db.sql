@@ -1,11 +1,18 @@
+drop table IF EXISTS `user`;
+drop table IF EXISTS `drop`;
+drop table IF EXISTS `theme`;
+drop table IF EXISTS `adress`;
+drop table IF EXISTS `drop_theme`;
+drop table IF EXISTS `precise_adress`;
+
 CREATE TABLE `user` (
-  `user_id` integer PRIMARY KEY,
+  `user_id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
-  `Mail` varchar(255)
+  `mail` varchar(255)
 );
 
 CREATE TABLE `drop` (
-  `drop_id` integer PRIMARY KEY,
+  `drop_id` integer PRIMARY KEY AUTO_INCREMENT,
   `image_url` varchar(255),
   `audio_url` varchar(255),
   `title` varchar(255),
@@ -15,31 +22,29 @@ CREATE TABLE `drop` (
 );
 
 CREATE TABLE `theme` (
-  `theme_id` integer PRIMARY KEY,
-  `libelle` varchar(255)
+  `libelle` varchar(250) PRIMARY KEY
 );
 
 CREATE TABLE `adress` (
-  `adress_id` integer PRIMARY KEY,
-  `location` varchar(255)
+  `location` varchar(250) PRIMARY KEY
 );
 
-Table "precise_adress" {
-  "precise_adress_id" integer [pk]
-  "lang" decimal
-  "lat" decimal
-  "ref_adress" integer
-}
+CREATE TABLE `precise_adress` (
+  `precise_adress_id` integer PRIMARY KEY AUTO_INCREMENT,
+  `longitude` float,
+  `latitude` float,
+  `ref_adress` varchar(250)
+);
 
 ALTER TABLE `drop` ADD FOREIGN KEY (`ref_user`) REFERENCES `user` (`user_id`);
 ALTER TABLE `drop` ADD FOREIGN KEY (`ref_precise_adress`) REFERENCES `precise_adress` (`precise_adress_id`);
-ALTER TABLE `precise_adress` ADD FOREIGN KEY (`ref_adress`) REFERENCES `adress` (`adress_id`);
+ALTER TABLE `precise_adress` ADD FOREIGN KEY (`ref_adress`) REFERENCES `adress` (`location`);
 
 CREATE TABLE `drop_theme` (
-  `drop_theme_id` integer PRIMARY KEY,
-  `ref_drop_rel` integer,
-  `ref_theme_rel` integer
+  `drop_theme_id` integer PRIMARY KEY AUTO_INCREMENT,
+  `ref_drop` integer,
+  `ref_theme` varchar(250)
 );
 
-ALTER TABLE `drop_theme` ADD FOREIGN KEY (`ref_drop_rel`) REFERENCES `drop` (`drop_id`);
-ALTER TABLE `drop_theme` ADD FOREIGN KEY (`ref_theme_rel`) REFERENCES `theme` (`theme_id`);
+ALTER TABLE `drop_theme` ADD FOREIGN KEY (`ref_drop`) REFERENCES `drop` (`drop_id`);
+ALTER TABLE `drop_theme` ADD FOREIGN KEY (`ref_theme`) REFERENCES `theme` (`libelle`);

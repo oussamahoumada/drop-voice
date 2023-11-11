@@ -1,6 +1,6 @@
 from flask import Flask
 from .extensions import api,db
-from .controllers.dropController import dropNs
+from .controllers.locationController import loactionNs
 
 def create_app():
     app = Flask(__name__)
@@ -9,5 +9,5 @@ def create_app():
     api.init_app(app)
     db.init_app(app)
 
-    api.add_namespace(dropNs)
+    api.add_namespace(loactionNs)
     return app
