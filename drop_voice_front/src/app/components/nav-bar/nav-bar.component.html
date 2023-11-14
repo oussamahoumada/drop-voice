@@ -1,6 +1,10 @@
-<p>nav-bar works!</p>
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+<div>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon style="scale: 3">menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Mon compte</button>
+    <button mat-menu-item>Mes enregistrements</button>
+    <button mat-menu-item>Logout</button>
+  </mat-menu>
+</div>

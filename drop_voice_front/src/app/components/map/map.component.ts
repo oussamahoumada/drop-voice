@@ -3,14 +3,11 @@ import { Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
 
 import { environment } from '../../../environments/environment';
-import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
-  standalone: true,
-  imports: [MatGridListModule],
 })
 export class MapComponent implements AfterViewInit {
   map: any;

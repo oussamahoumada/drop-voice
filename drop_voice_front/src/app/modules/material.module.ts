@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const materials: any = [
   MatMenuModule,
@@ -21,6 +22,7 @@ const materials: any = [
   MatButtonModule,
   MatDialogModule,
   MatSelectModule,
+  MatGridListModule,
   MatFormFieldModule,
   MatPaginatorModule,
 ];
