@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+    flaskdocker:
+        container_name: python-drop-voice
+        build:
+            context: .
+            dockerfile: './DockerFile'
+        ports: 
+            - "5000:5000"
+        volumes:
+            - './:/app-flask'
