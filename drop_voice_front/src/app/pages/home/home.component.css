@@ -1,0 +1,9 @@
+.nav mat-grid-tile {
+  background: lightblue;
+}
+.map mat-grid-tile {
+  background: rgb(73, 116, 99);
+}
+.features mat-grid-tile {
+  background: rgb(224, 91, 58);
+}
