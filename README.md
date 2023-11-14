@@ -2,14 +2,8 @@
 
 ## Commandes Docker
 ```bash
-
 cd drop_voice_back
-
-docker-compose down
-docker-compose up --build
-
 ```
-
 ### Start le container
 ```bash
 docker-compose up --build

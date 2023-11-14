@@ -1,9 +1,10 @@
 import json
 from flask_restx import Resource, Namespace
-from ..models.auth.auth_api_model import login_model, register_model
+from ..models.auth.auth_api_model import login_model, register_model, logout_model
 auth_ns = Namespace("auth/")
 
-from ..pyrebase_config import set_up_pyrebase, set_test
+from ..services.token_service import TokenService
+from ..pyrebase_config import set_up_pyrebase
 
 auth = set_up_pyrebase().auth()
 
@@ -63,3 +64,21 @@ class FirebaseAuthentificationLogin(Resource):
             code: int = 401
 
         return response, code
+
+
+@auth_ns.route('/logout')
+class FirebaseAuthentificationLogout(Resource):
+   
+    @auth_ns.expect(logout_model)
+    def post(self) -> json:
+        token: str = auth_ns.payload['id_token']
+        decoded_token = TokenService.decode_token(self, token)
+
+        if 'error' in decoded_token:
+            return {'success': False, 'error': 'Le token n\'existe pas'}
+
+        user_id: str = decoded_token['decode']['user_id']
+        TokenService.handle_logout(self, user_id)
+
+        return {'success': True}, 200
+
