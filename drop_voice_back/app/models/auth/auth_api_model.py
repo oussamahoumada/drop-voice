@@ -6,6 +6,10 @@ login_model = api.model("login",{
     'password' : fields.String,
 })
 
+logout_model = api.model("logout",{
+    'id_token' : fields.String,
+})
+
 register_model = api.model("register",{
     'email' : fields.String,
     'password' : fields.String,
