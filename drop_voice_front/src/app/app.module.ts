@@ -12,9 +12,11 @@ import { AppRoutingModule } from './modules/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, MapComponent, NavBarComponent],
+  declarations: [AppComponent, HomeComponent, MapComponent, NavBarComponent, LoginComponent, RegisterComponent],
   imports: [
     FormsModule,
     BrowserModule,
