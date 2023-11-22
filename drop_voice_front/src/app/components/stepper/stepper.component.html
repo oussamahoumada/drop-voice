@@ -1,0 +1,82 @@
+<mat-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Audio</ng-template>
+      <form [formGroup]="audioForm" class="center-content">
+        <mat-label>Enregistrer votre audio</mat-label>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <button mat-flat-button (click)="startRecording()">
+            <mat-icon>mic</mat-icon>
+          </button>
+          <button mat-flat-button (click)="stopRecording()">
+            <mat-icon>stop</mat-icon>
+          </button>
+
+          <a [href]="fileUrl" download="file.mp3">DownloadFile</a>
+        </div>
+        <div>
+          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Titre</ng-template>
+      <form [formGroup]="audioForm" class="center-content">
+        <mat-form-field>
+          <mat-label>Titre</mat-label>
+          <input matInput formControlName="titleCtrl" placeholder="Titre" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Thème</ng-template>
+      <form [formGroup]="audioForm" class="center-content">
+        <mat-form-field>
+          <mat-label>Thème</mat-label>
+          <select matNativeControl formControlName="themeCtrl">
+            <option>Musique</option>
+            <option>Musée</option>
+          </select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Image</ng-template>
+      <form [formGroup]="audioForm" class="center-content">
+        <mat-label>Insérer une image</mat-label>
+        <mat-toolbar>
+          <input matInput  [readonly]="true" [value]="selectedImageName ? selectedImageName : 'Insérer une image'" />
+
+          <button mat-flat-button color="primary">
+            Upload
+            <input id="fileInput" type="file" (change)="onImageSelected($event)" accept="image/*" />
+          </button>
+        </mat-toolbar>
+
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Fin</ng-template>
+      <div class="center-content">
+        <p>Sauvegarder votre Drop.</p>
+        <div>
+          <button mat-raised-button (click)="submitForm()">Sauvegarder</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
