@@ -11,14 +11,6 @@ import { MyCardComponent } from '../my-card/my-card.component';
 export class MarkerContentComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
   ngOnInit(): void {
-    this.dialog.open(MyCardComponent, {
-      data: {
-        animal: 'panda',
-      },
-    });
+    this.dialog.open(MyCardComponent, {});
   }
-}
-
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
 }

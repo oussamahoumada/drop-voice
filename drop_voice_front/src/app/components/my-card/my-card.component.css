@@ -1,11 +1,23 @@
-.example-card {
-  max-width: 400px;
-  min-width: 360px;
-  margin-left: 0px;
-  margin-right: 0px;
+.example-card img-container {
+  /* max-height: 100px; */
+  width: auto; /* Ensure the container takes the full width of the card */
+  display: flex;
+  align-items: center; /* Center the image horizontally within the container */
+  justify-content: center; /* Center the image vertically within the container */
 }
 
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
+.example-card img {
+  max-height: 300px; /* Set maximum height for the image relative to its container */
+  /* width: auto; Maintain aspect ratio */
+}
+
+/* Additional styling for other elements within the card */
+mat-card-title,
+mat-card-subtitle {
+  /* text-align: center; */
+  width: 250px;
+}
+
+mat-card-actions {
+  text-align: center;
 }
