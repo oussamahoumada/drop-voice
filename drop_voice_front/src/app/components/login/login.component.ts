@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) {}
   ngOnInit() {}
 
   public loginForm: FormGroup = new FormGroup({
@@ -17,11 +21,12 @@ export class LoginComponent implements OnInit {
     email: new FormControl(null, [Validators.required, Validators.email]),
   });
 
-  doAuthentication() {
+  authentication() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         (res: any) => {
           if (res) {
+            this.cookieService.set('token', res.token);
             Swal.fire('Success', 'login Success', 'success');
           } else {
             Swal.fire('warning', 'mail/passWord incorrect', 'warning');
