@@ -42,6 +42,54 @@ export class MapComponent implements AfterViewInit {
       popupAnchor: [13, 0],
     });
 
+
+
+
+     
+
+let geojson = L.geoJSON(data, {
+  onEachFeature: (feature, layer) => {
+  let popup = L.popup();
+  layer.on({
+  click: () => {
+  this.zone.run( () => {
+  
+  if (this. componentRef) {
+  this.componentRef.destroy();
+  
+  )
+  
+  const compFactory
+  
+  this.componentRef
+  
+  this. componentFactoryResolver . resolveComponentFactory (componentDetailmponent) ;
+  compFactory.create (this. injector);
+  
+  4"
+  
+  if (this.appRef['attachview']) { // since 2.3.0
+  this.appRef ['attachView'] (this.componentRef .hostView) ;
+  this.componentRef .onDestroy(() => {
+  
+  this. appRef ['detachView'] (this. componentRef .hostView) ;
+  De
+  
+  } else {
+  this. appRef['registerChangeDetector' ] (this.componentRef .changeDetectorRef) ;
+  this.componentRef.onDestroy(() => {
+  
+    
+  
+  this. appRef ['unregisterChangeDetector'] (this. componentRef .changeDetectorRef) ;
+  be
+  }
+  
+  let div = document.createElement ('div');
+  div.appendChild(this.componentRef.1location.nativeElement) ;
+  popup. setContent (div) ;
+}
+
     const marker = L.marker([pos.latitude, pos.longitude], {
       icon,
     }).bindPopup('Angular Leaflet');

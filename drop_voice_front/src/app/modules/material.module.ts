@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 const materials: any = [
   MatMenuModule,
@@ -23,6 +24,7 @@ const materials: any = [
   MatDialogModule,
   MatSelectModule,
   MatGridListModule,
+  MatCardModule,
   MatFormFieldModule,
   MatPaginatorModule,
 ];

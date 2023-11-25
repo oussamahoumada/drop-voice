@@ -12,12 +12,29 @@ import { AppRoutingModule } from './modules/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MarkerContentComponent } from './components/marker-content/marker-content.component';
+import { MyCardComponent } from './components/my-card/my-card.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { LecteurAudioComponent } from './components/lecteur-audio/lecteur-audio.component';
+import { AngMusicPlayerModule } from 'ang-music-player';
 
+import { CommonModule } from '@angular/common';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, MapComponent, NavBarComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    MapComponent,
+    NavBarComponent,
+    MarkerContentComponent,
+    MyCardComponent,
+    LecteurAudioComponent,
+  ],
   imports: [
     FormsModule,
+    AngMusicPlayerModule,
     BrowserModule,
+    NgxAudioPlayerModule,
+    CommonModule,
     MaterialModule,
     HttpClientModule,
     AppRoutingModule,
