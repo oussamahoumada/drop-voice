@@ -3,6 +3,21 @@
   text-align: -webkit-center;
 }
 
-mat-card, mat-card-content, form{
+mat-card-content, form{
   padding:5%;
+}
+
+mat-card, div{
+  height: 100%;
+}
+
+p{
+  height: 25%;
+}
+mat-card-title{
+  height: 20%;
+  padding: 70px 0;
+}
+mat-card-content{
+  height: 80%;
 }
