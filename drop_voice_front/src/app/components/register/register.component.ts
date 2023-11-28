@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   Register() {
     if (this.registrationForm.valid) {
-      this.authService.Registration(this.registrationForm.value).subscribe(
+      this.authService.registration(this.registrationForm.value).subscribe(
         (res: any) => {
           if (res) {
             Swal.fire('Success', 'Registration Success', 'success');

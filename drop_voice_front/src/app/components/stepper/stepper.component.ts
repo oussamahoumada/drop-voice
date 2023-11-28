@@ -1,38 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MapService } from 'src/app/services/map.service';
+import { ThemeApiService } from 'src/app/services/theme-api.service';
+import { ThemeInterface } from 'src/app/interfaces/theme/theme-interface';
 
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.css'],
 })
-export class StepperComponent {
+export class StepperComponent implements OnInit {
+  public selectedImage?: File;
+  public selectedImageName?: string;
+
+  public isLinear: boolean = false;
+  public fileUrl: SafeResourceUrl|null = null;
+
+  public themes:ThemeInterface[] = [];
 
   constructor(
     private _formBuilder: FormBuilder,
     private audioRecorderService: NgAudioRecorderService,
     private sanitizer: DomSanitizer,
-    private mapService: MapService
+    private mapService: MapService,
+    private themeService: ThemeApiService
   ) {
   }
 
-  selectedImage?: File;
-  selectedImageName?: string;
+  ngOnInit(): void
+  {
+    this.themeService.getThemes().subscribe(response => {
+      console.log(response)
+      
+      this.themes = response;
+    })
+  }
 
   audioForm: FormGroup = this._formBuilder.group({
     audioCtrl: ['', Validators.required],
     titleCtrl: ['', Validators.required],
-    themeCtrl: ['Musique', Validators.required],
+    themeCtrl: ['', Validators.required],
     imageCtrl: ['', Validators.required],
     latitude: [''],
     longitude: ['']
   });
-
-  isLinear: boolean = false;
-  fileUrl: SafeResourceUrl|null = null;
 
   public startRecording(): void
   {

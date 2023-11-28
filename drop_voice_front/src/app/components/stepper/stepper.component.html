@@ -49,8 +49,7 @@
         <mat-form-field>
           <mat-label>Thème</mat-label>
           <select matNativeControl formControlName="themeCtrl">
-            <option>Musique</option>
-            <option>Musée</option>
+            <option *ngFor="let theme of themes" value='{{theme.libelle}}'>{{theme.libelle}}</option>
           </select>
         </mat-form-field>
         <div>
