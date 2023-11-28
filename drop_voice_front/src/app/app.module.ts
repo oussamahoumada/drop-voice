@@ -14,19 +14,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkerContentComponent } from './components/marker-content/marker-content.component';
+import { MyCardComponent } from './components/my-card/my-card.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { LecteurAudioComponent } from './components/lecteur-audio/lecteur-audio.component';
 
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MapComponent,
     NavBarComponent,
+    MarkerContentComponent,
+    MyCardComponent,
+    LecteurAudioComponent,
     LoginComponent,
     RegisterComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    NgxAudioPlayerModule,
+    CommonModule,
     MaterialModule,
     HttpClientModule,
     AppRoutingModule,

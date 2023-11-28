@@ -25,6 +25,7 @@ const materials: any = [
   MatDialogModule,
   MatSelectModule,
   MatGridListModule,
+  MatCardModule,
   MatFormFieldModule,
   MatPaginatorModule,
 ];
