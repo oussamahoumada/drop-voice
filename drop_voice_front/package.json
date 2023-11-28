@@ -29,6 +29,7 @@
     "bootstrap-icons": "^1.11.1",
     "chart.js": "^3.1.1",
     "leaflet": "^1.9.4",
+    "ng-audio-recorder": "^0.0.5",
     "ngx-audio-player": "^12.0.2",
     "ngx-cookie-service": "^17.0.0",
     "rxjs": "~7.8.0",
