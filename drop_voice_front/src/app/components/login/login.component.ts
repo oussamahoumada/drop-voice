@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe(
         (res: any) => {
           if (res) {
-            this.cookieService.set('token', res.token);
+            this.cookieService.set('token', res.user.idToken);
+            console.log(res)
             Swal.fire('Success', 'login Success', 'success');
           } else {
             Swal.fire('warning', 'mail/passWord incorrect', 'warning');

@@ -32,8 +32,6 @@ export class StepperComponent implements OnInit {
   ngOnInit(): void
   {
     this.themeService.getThemes().subscribe(response => {
-      console.log(response)
-      
       this.themes = response;
     })
   }
@@ -58,7 +56,7 @@ export class StepperComponent implements OnInit {
     this.audioForm.patchValue({ imageCtrl: file });
     this.selectedImageName = file ? file.name : undefined;
   }
-  
+
   public stopRecording(): void
   {
     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {

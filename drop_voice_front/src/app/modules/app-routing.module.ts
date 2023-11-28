@@ -6,11 +6,11 @@ import { RegisterComponent } from '../components/register/register.component';
 import { AuthGuard } from '../auth.guard';
 
 const routes: Routes = [
-  /*{ path: '**', redirectTo: 'home' },*/
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', component: HomeComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'home', component: HomeComponent/*, canActivate: [AuthGuard]*/ },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
