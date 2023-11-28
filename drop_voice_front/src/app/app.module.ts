@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { MarkerContentComponent } from './components/marker-content/marker-content.component';
 import { MyCardComponent } from './components/my-card/my-card.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
