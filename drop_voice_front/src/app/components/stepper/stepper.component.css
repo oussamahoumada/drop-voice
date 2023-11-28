@@ -1,0 +1,32 @@
+.mat-stepper-horizontal {
+    margin-top: 1%;
+}
+  
+.mat-mdc-form-field {
+    margin-top: 16px;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#fileInput {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+mat-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0%;
+    margin-bottom: 2%;
+}

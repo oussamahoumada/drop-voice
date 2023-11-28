@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
     flaskdocker:
-        container_name: python-drop-voice
+        container_name: python-geo-voice
         build:
             context: .
             dockerfile: './DockerFile'
@@ -11,12 +11,12 @@ services:
         volumes:
             - './:/app'
         links:
-            - db:db
+            - database-geo-voice:database-geo-voice
         networks:
             - python
         
-    db:
-        container_name: db
+    database-geo-voice:
+        container_name: database-geo-voice
         image: mysql:latest
         volumes:
             - dbdata:/var/lib/mysql
@@ -33,13 +33,13 @@ services:
     # phpmyadmin
     phpmyadmin:
         depends_on:
-            - db
+            - database-geo-voice
         image: phpmyadmin
         restart: always
         ports:
             - "8090:80"
         environment:
-            PMA_HOST: db
+            PMA_HOST: database-geo-voice
         networks:
             - mysql-phpmyadmin
 

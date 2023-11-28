@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { environment } from '../../../environments/environment';
 import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
-import { DropData } from 'src/app/types/my-types';
+import { DropData } from 'src/app/interfaces/drop/drop-interface';
 
 @Component({
   selector: 'app-map',
@@ -96,21 +95,5 @@ export class MapComponent implements AfterViewInit, OnInit {
     //   }).bindPopup('Angular Leaflet');
     //   marker.addTo(this.map);
     // });
-  }
-
-  private getCurrentPosition(): any {
-    return new Observable((observer: Subscriber<any>) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position: any) => {
-          observer.next({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-          observer.complete();
-        });
-      } else {
-        observer.error();
-      }
-    });
   }
 }
