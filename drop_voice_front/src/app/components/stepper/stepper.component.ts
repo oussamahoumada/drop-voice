@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MapService } from 'src/app/services/map.service';
 
 @Component({
   selector: 'app-stepper',
@@ -10,7 +11,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class StepperComponent {
 
-  constructor(private _formBuilder: FormBuilder, private audioRecorderService: NgAudioRecorderService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private audioRecorderService: NgAudioRecorderService,
+    private sanitizer: DomSanitizer,
+    private mapService: MapService
+  ) {
+  }
 
   selectedImage?: File;
   selectedImageName?: string;
@@ -19,23 +26,28 @@ export class StepperComponent {
     audioCtrl: ['', Validators.required],
     titleCtrl: ['', Validators.required],
     themeCtrl: ['Musique', Validators.required],
-    imageCtrl: ['', Validators.required]
+    imageCtrl: ['', Validators.required],
+    latitude: [''],
+    longitude: ['']
   });
 
   isLinear: boolean = false;
   fileUrl: SafeResourceUrl|null = null;
 
-  startRecording() {
+  public startRecording(): void
+  {
     this.audioRecorderService.startRecording();
   }
 
-  onImageSelected(event: any) {
+  public onImageSelected(event: any): void
+  {
     const file = (event.target as HTMLInputElement).files?.[0];
     this.audioForm.patchValue({ imageCtrl: file });
     this.selectedImageName = file ? file.name : undefined;
   }
   
-  stopRecording() {
+  public stopRecording(): void
+  {
     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {
       if (output instanceof Blob) {
         this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(output));
@@ -47,7 +59,17 @@ export class StepperComponent {
     });
   }
 
-  submitForm() {
-    console.log(this.audioForm.value);
+  public submitForm(): void
+  {
+    if (this.audioForm.valid) {
+      this.mapService.getCurrentPosition().subscribe(map => {
+        this.audioForm.patchValue({ latitude: map.latitude})
+        this.audioForm.patchValue({ longitude: map.longitude})
+        console.log(this.audioForm.value);
+      })
+
+    } else {
+      alert('Veuillez completer le formulaire');
+    }
   }
 }

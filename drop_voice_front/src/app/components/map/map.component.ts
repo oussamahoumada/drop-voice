@@ -18,22 +18,6 @@ export class MapComponent implements AfterViewInit {
     this.loadMap();
   }
 
-  private getCurrentPosition(): any {
-    return new Observable((observer: Subscriber<any>) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position: any) => {
-          observer.next({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-          observer.complete();
-        });
-      } else {
-        observer.error();
-      }
-    });
-  }
-
   private initialisePosition(pos: any, zoom: number) {
     this.map.flyTo([pos.latitude, pos.longitude], zoom);
     const icon = L.icon({

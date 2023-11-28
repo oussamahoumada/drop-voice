@@ -1,6 +1,8 @@
 <mat-stepper [linear]="isLinear" #stepper>
     <mat-step>
-      <ng-template matStepLabel>Audio</ng-template>
+      <ng-template matStepLabel>
+        <mat-icon>record_voice_over</mat-icon>
+      </ng-template>
       <form [formGroup]="audioForm" class="center-content">
         <mat-label>Enregistrer votre audio</mat-label>
         <div fxLayout="row" fxLayoutGap="8px">
@@ -14,27 +16,35 @@
           <a [href]="fileUrl" download="file.mp3">DownloadFile</a>
         </div>
         <div>
-          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('audioCtrl')?.valid">Suivant</button>
         </div>
       </form>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Titre</ng-template>
+      <ng-template matStepLabel>
+        <mat-icon> title</mat-icon>
+      </ng-template>
       <form [formGroup]="audioForm" class="center-content">
         <mat-form-field>
           <mat-label>Titre</mat-label>
           <input matInput formControlName="titleCtrl" placeholder="Titre" required>
+          <mat-error *ngIf="audioForm.get('titleCtrl')?.hasError('required')">
+            Veuillez insérer un titre
+          </mat-error>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('titleCtrl')?.valid">Suivant</button>
         </div>
       </form>
+
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Thème</ng-template>
+      <ng-template matStepLabel>
+        <mat-icon>list</mat-icon>
+      </ng-template>
       <form [formGroup]="audioForm" class="center-content">
         <mat-form-field>
           <mat-label>Thème</mat-label>
@@ -45,17 +55,18 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('themeCtrl')?.valid">Suivant</button>
         </div>
       </form>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Image</ng-template>
+      <ng-template matStepLabel>
+        <mat-icon>add_photo_alternate</mat-icon>
+      </ng-template>
       <form [formGroup]="audioForm" class="center-content">
-        <mat-label>Insérer une image</mat-label>
         <mat-toolbar>
-          <input matInput  [readonly]="true" [value]="selectedImageName ? selectedImageName : 'Insérer une image'" />
+          <input matInput [readonly]="true" [value]="selectedImageName ? selectedImageName : 'Insérer une image'" />
 
           <button mat-flat-button color="primary">
             Upload
@@ -65,17 +76,19 @@
 
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-raised-button matStepperNext color="primary">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('imageCtrl')?.valid">Suivant</button>
         </div>
       </form>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Fin</ng-template>
+      <ng-template matStepLabel>
+        <mat-icon>check</mat-icon>
+      </ng-template>
       <div class="center-content">
         <p>Sauvegarder votre Drop.</p>
         <div>
-          <button mat-raised-button (click)="submitForm()">Sauvegarder</button>
+          <button mat-raised-button (click)="submitForm()" [disabled]="!audioForm.valid">Sauvegarder</button>
         </div>
       </div>
     </mat-step>
