@@ -1,43 +1,72 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { environment } from '../../../environments/environment';
+import { MyCardComponent } from '../my-card/my-card.component';
+import { DropDataService } from 'src/app/services/drop-data.service';
+import { DropData } from 'src/app/types/my-types';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit, OnInit {
   map: any;
+  dropsData: DropData[] = [];
 
-  constructor() {}
+  constructor(
+    public dialog: MatDialog,
+    private dropDataService: DropDataService
+  ) {}
+
+  displayMarkerContent: boolean = true;
+  that = this;
+
+  ngOnInit(): void {
+    this.dropsData = this.dropDataService.getData();
+  }
 
   public ngAfterViewInit(): void {
     this.loadMap();
+    const univP8 = {
+      latitude: 48.94492,
+      longitude: 2.36424,
+    };
+    this.initialiseView(univP8, 13);
+    this.initialiseMarkers();
   }
 
-  private initialisePosition(pos: any, zoom: number) {
+  handleMarkerClick(dropData: DropData) {
+    this.dialog.open(MyCardComponent, { data: dropData });
+  }
+
+  private initialiseView(pos: any, zoom: number) {
     this.map.flyTo([pos.latitude, pos.longitude], zoom);
+    this.map;
+  }
+
+  private initialiseMarkers() {
     const icon = L.icon({
       iconUrl: '../../../assets/images/marker-icon.png',
       shadowUrl: '../../../assets/images/marker-shadow.png',
       popupAnchor: [13, 0],
     });
-
-    const marker = L.marker([pos.latitude, pos.longitude], {
-      icon,
-    }).bindPopup('Angular Leaflet');
-    marker.addTo(this.map);
+    const that = this;
+    this.dropsData.forEach((element) => {
+      const marker = L.marker([element.latitude, element.longitude], {
+        icon,
+      }).on('click', function (e) {
+        that.handleMarkerClick(element);
+      });
+      marker.addTo(this.map);
+    });
   }
 
+  //  Load Map
   private loadMap(): void {
-    const univP8 = {
-      latitude: 48.94492,
-      longitude: 2.36424,
-    };
-
     this.map = L.map('map').setView([0, 0], 2);
     L.tileLayer(
       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
@@ -51,8 +80,6 @@ export class MapComponent implements AfterViewInit {
         accessToken: environment.mapbox.accessToken,
       }
     ).addTo(this.map);
-
-    this.initialisePosition(univP8, 15);
 
     // Get the current position automatically when the map is displayed
     // this.getCurrentPosition().subscribe((position: any) => {

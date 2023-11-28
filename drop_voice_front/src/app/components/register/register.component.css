@@ -1,0 +1,8 @@
+*{
+  width: 100%;
+  text-align: -webkit-center;
+}
+
+mat-card, mat-card-content, form{
+  padding:5%;
+}

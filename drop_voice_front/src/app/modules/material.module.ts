@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -19,12 +20,14 @@ const materials: any = [
   MatTabsModule,
   MatSortModule,
   MatIconModule,
+  MatCardModule,
   MatInputModule,
   MatTableModule,
   MatButtonModule,
   MatDialogModule,
   MatSelectModule,
   MatGridListModule,
+  MatCardModule,
   MatFormFieldModule,
   MatPaginatorModule,
   MatButtonModule,
