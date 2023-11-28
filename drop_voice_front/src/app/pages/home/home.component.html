@@ -5,13 +5,26 @@
   ></mat-grid-tile>
 </mat-grid-list>
 
-<!-- Map -->
-<mat-grid-list class="map" cols="1" rowHeight="80vh">
-  <mat-grid-tile><app-map></app-map> </mat-grid-tile>
-  <!-- <app-marker-content></app-marker-content> -->
-</mat-grid-list>
+<!-- Map + Stepper Drop -->
+<div class="container">
+  <mat-grid-list class="map" cols="1" rowHeight="80vh">
+    <mat-grid-tile>
+      <app-map></app-map>
+    </mat-grid-tile>
+    <!-- <app-marker-content></app-marker-content> -->
+  </mat-grid-list>
+
+  <app-stepper *ngIf='isStepperVisible'></app-stepper>
+</div>
 
 <!-- Listen + Record  -->
 <mat-grid-list class="features" cols="1" rowHeight="10vh">
-  <mat-grid-tile>Listen + Record</mat-grid-tile>
+  <mat-grid-tile>
+   <button mat-button (click)='toggleStepperComponent()'>
+      <mat-icon>headset</mat-icon>
+    </button>
+    <button mat-button (click)='toggleStepperComponent()'>
+  	  <mat-icon>mic</mat-icon>
+    </button>
+  </mat-grid-tile>
 </mat-grid-list>

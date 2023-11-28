@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DropData } from '../types/my-types';
+import { DropData } from '../interfaces/drop/drop-interface';
 
 @Injectable({
   providedIn: 'root',

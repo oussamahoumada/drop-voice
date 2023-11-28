@@ -7,3 +7,19 @@
 .features mat-grid-tile {
   background: rgb(224, 91, 58);
 }
+
+.container {
+  position: relative;
+}
+
+.map {
+  z-index: 1;
+}
+
+app-stepper {
+  position: absolute;
+  left: 0;
+  top: 65%;
+  z-index: 2;
+  width: 100%;
+}
