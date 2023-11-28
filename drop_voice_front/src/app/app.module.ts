@@ -8,8 +8,11 @@ import { NgModule, isDevMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './modules/material.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MarkerContentComponent } from './components/marker-content/marker-content.component';
@@ -28,6 +31,8 @@ import { CommonModule } from '@angular/common';
     MarkerContentComponent,
     MyCardComponent,
     LecteurAudioComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     FormsModule,

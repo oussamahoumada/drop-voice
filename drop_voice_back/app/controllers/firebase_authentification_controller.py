@@ -1,11 +1,14 @@
 import json
 from flask_restx import Resource, Namespace
-from ..models.auth.auth_api_model import login_model, register_model, logout_model
-auth_ns = Namespace("auth/")
 
-from ..services.token_service import TokenService
+from ..extensions import db
+from ..models.models import user
 from ..pyrebase_config import set_up_pyrebase
+from ..services.token_service import TokenService
+from ..models.auth.auth_api_model import login_model, register_model, logout_model
 
+
+auth_ns = Namespace("auth/")
 auth = set_up_pyrebase().auth()
 
 @auth_ns.route("/register")
@@ -17,6 +20,13 @@ class FirebaseAuthentificationRegistration(Resource):
         password: str = auth_ns.payload['password']
         firstname: str = auth_ns.payload['first_name']
         lastname: str = auth_ns.payload['last_name']
+        u = user(
+            name = auth_ns.payload['first_name']+' '+auth_ns.payload['last_name'],
+            mail = auth_ns.payload['email']
+        )
+
+        db.session.add(u)
+        db.session.commit()
 
         try:
             user: dict = auth.create_user_with_email_and_password(email, password)

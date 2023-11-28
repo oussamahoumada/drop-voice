@@ -1,4 +1,4 @@
-from ..extensions import api
+from app.extensions import api
 from flask_restx import fields
 
 drop_model = api.model("drop",{
@@ -13,8 +13,6 @@ user_model = api.model("user",{
     'user_id': fields.Integer,
     'name' : fields.String,
     'mail' : fields.String,
+    '_drops':fields.List(fields.Nested(drop_model)),
 })
 
-theme_model = api.model("theme",{
-    'libelle' : fields.String,
-})
