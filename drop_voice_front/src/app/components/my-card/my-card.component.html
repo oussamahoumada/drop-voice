@@ -1,0 +1,41 @@
+<mat-card class="example-card">
+  <img mat-card-image [src]="dropData.imageUrl" alt="Photo of a Shiba Inu" />
+  <mat-card-header>
+    <mat-card-title> Title : {{ dropData.title }}</mat-card-title>
+    <mat-card-title> Théme : {{ dropData.theme }} </mat-card-title>
+  </mat-card-header>
+  <mat-card-actions
+    style="
+      align-content: center;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+    "
+  >
+    <app-lecteur-audio [audioUrl]="dropData.audio"></app-lecteur-audio>
+  </mat-card-actions>
+</mat-card>
+
+<!-- <mat-card class="example-card">
+  <img
+    mat-card-image
+    src="
+      https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Tour_eiffel_-_vue_du_trocad%C3%A9ro.jpg/1200px-Tour_eiffel_-_vue_du_trocad%C3%A9ro.jpg
+    "
+    alt="Photo of a Shiba Inu"
+  />
+  <mat-card-header>
+    <mat-card-title> Title : theme</mat-card-title>
+    <mat-card-title> Théme :title </mat-card-title>
+  </mat-card-header>
+  <mat-card-actions
+    style="
+      align-content: center;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+    "
+  >
+    <app-lecteur-audio></app-lecteur-audio>
+  </mat-card-actions>
+</mat-card> -->
