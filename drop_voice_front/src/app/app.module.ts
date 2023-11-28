@@ -21,7 +21,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgAudioRecorderModule } from 'ng-audio-recorder';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
-import { AngMusicPlayerModule } from 'ang-music-player';
 
 import { CommonModule } from '@angular/common';
 @NgModule({
@@ -39,7 +38,6 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     FormsModule,
-    AngMusicPlayerModule,
     BrowserModule,
     NgxAudioPlayerModule,
     CommonModule,
