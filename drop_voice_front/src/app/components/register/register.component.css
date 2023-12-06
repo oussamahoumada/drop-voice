@@ -14,13 +14,18 @@ mat-card, div{
 p{
   height: 25%;
 }
+
 mat-card-title{
   height: 20%;
   padding: 70px 0;
+  align-items: center;
+  text-align: center;
 }
+
 mat-card-content{
   height: 80%;
 }
+
 mat-card, mat-card-content, form{
   padding:5%;
 }

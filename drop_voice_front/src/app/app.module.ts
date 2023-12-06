@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgAudioRecorderModule } from 'ng-audio-recorder';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { CommonModule } from '@angular/common';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CommonModule } from '@angular/common';
     LecteurAudioComponent,
     LoginComponent,
     RegisterComponent,
-    StepperComponent
+    StepperComponent,
+    MyAccountComponent
   ],
   imports: [
     FormsModule,

@@ -2,7 +2,7 @@ import json
 from flask_restx import Resource, Namespace
 
 from ..extensions import db
-from ..models.models import user
+from ..models.models import User
 from ..pyrebase_config import set_up_pyrebase
 from ..services.token_service import TokenService
 from ..models.auth.auth_api_model import login_model, register_model, logout_model
@@ -18,23 +18,26 @@ class FirebaseAuthentificationRegistration(Resource):
     def post(self) -> json:
         email: str = auth_ns.payload['email']
         password: str = auth_ns.payload['password']
-        firstname: str = auth_ns.payload['first_name']
-        lastname: str = auth_ns.payload['last_name']
-        u = user(
-            name = auth_ns.payload['first_name']+' '+auth_ns.payload['last_name'],
-            mail = auth_ns.payload['email']
+        first_name: str = auth_ns.payload['first_name']
+        last_name: str = auth_ns.payload['last_name']
+
+        name: str = first_name + ' ' + last_name
+
+        user: User = User(
+            name = name,
+            mail = email
         )
 
-        db.session.add(u)
+        db.session.add(user)
         db.session.commit()
 
         try:
-            user: dict = auth.create_user_with_email_and_password(email, password)
-            auth.update_profile(display_name=firstname + ' ' + lastname, id_token=user['idToken'])
+            user_firebase: dict = auth.create_user_with_email_and_password(email, password)
+            auth.update_profile(display_name=name, id_token=user_firebase['idToken'])
 
             content: dict = {
                 'success': True,
-                'user': user
+                'user': user_firebase
             }
             code: int = 200
 
@@ -59,8 +62,10 @@ class FirebaseAuthentificationLogin(Resource):
 
         try:
             auth_user: dict = auth.sign_in_with_email_and_password(email, password)
+            user: int = User.query.filter_by(mail=email).first()
 
             response: dict = {
+                'id': user.user_id,
                 'user': auth_user,
                 'success': True
             }

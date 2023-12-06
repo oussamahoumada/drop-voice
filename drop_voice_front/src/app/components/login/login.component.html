@@ -16,7 +16,8 @@
           </mat-form-field>
         </p>
         <div class="button">
-          <button (click)="authentication()" mat-button>Login</button>
+          <button (click)="authentication()" mat-raised-button>Se connecter</button>
+          <button class="btn-register" [routerLink]="['/register']" mat-raised-button>Créer un compte</button>
         </div>
       </form>
     </mat-card-content>

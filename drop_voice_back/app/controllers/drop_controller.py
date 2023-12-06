@@ -7,7 +7,7 @@ from ..models.drop.drop_api_model import drop_model
 drop_ns = Namespace("drop/")
 
 @drop_ns.route("/Drop")
-class themeAPI(Resource):
+class DropApi(Resource):
     @drop_ns.marshal_list_with(drop_model)
     def get(self):
         return drop.query.all()
