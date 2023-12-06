@@ -1,7 +1,6 @@
 drop table IF EXISTS `user`;
 drop table IF EXISTS `drop`;
 drop table IF EXISTS `theme`;
-drop table IF EXISTS `adress`;
 drop table IF EXISTS `drop_theme`;
 drop table IF EXISTS `precise_adress`;
 
@@ -25,15 +24,10 @@ CREATE TABLE `theme` (
   `libelle` varchar(250) PRIMARY KEY
 );
 
-CREATE TABLE `adress` (
-  `location` varchar(250) PRIMARY KEY
-);
-
 CREATE TABLE `precise_adress` (
   `precise_adress_id` integer PRIMARY KEY AUTO_INCREMENT,
   `longitude` float,
   `latitude` float,
-  `ref_adress` varchar(250)
 );
 
 ALTER TABLE `drop` ADD FOREIGN KEY (`ref_user`) REFERENCES `user` (`user_id`);
