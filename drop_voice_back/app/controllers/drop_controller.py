@@ -12,7 +12,7 @@ from ..models.drop.drop_api_model import drop_input_model, get_all_drop_model
 drop_ns = Namespace("drop/")
 
 @drop_ns.route("/add_drop")
-class dropAPI(Resource):   
+class DropAPI(Resource):   
     @drop_ns.expect(drop_input_model)
     def post(self):
         image = drop_ns.payload['image']
@@ -27,14 +27,14 @@ class dropAPI(Resource):
         upload(image, image_url)
         upload(audio, audio_url)
         
-        newAdress = precise_adress(
+        new_address = precise_adress(
             longitude = long,
             latitude = lat
         )
         req = precise_adress.query.filter(and_(precise_adress.longitude==long, precise_adress.latitude==lat))
         
         if(req.all() == []):
-            db.session.add(newAdress)
+            db.session.add(new_address)
             db.session.commit()
             req = precise_adress.query.filter(and_(precise_adress.longitude==long, precise_adress.latitude==lat))
         
@@ -55,7 +55,7 @@ class dropAPI(Resource):
         return "success", 200
 
 @drop_ns.route("/get_all_drops")
-class dropAPI(Resource):
+class DropAPI(Resource):
     @drop_ns.marshal_list_with(get_all_drop_model)
     def get(self):
         drops = drop.query.all()

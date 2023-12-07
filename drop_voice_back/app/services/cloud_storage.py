@@ -4,7 +4,7 @@ import dropbox
 ## add to dropbox ##
 ####################
 
-def uploadFile(access_token, file_from,file_to):
+def upload_file(access_token, file_from,file_to):
 
     dbx = dropbox.Dropbox(access_token)
 
@@ -21,7 +21,7 @@ def add_to_dropbox(path, name):
     print(file_to)
     print(path)
     access_token = 'sl.BrT1pr0bsC3MF7e0cfMwsGFWN9Q2LCpuyv6bKvuE-vmBxE1NrW8IFfFJxYTSGgn3dxbD0vPMGW07tzKWlt8dYHWpnMA9N0xEvfUp94oqsmJsOo375NSY46HLW7jUhlzuOx-nttSv0Rhj'
-    uploadFile(access_token, path, file_to)
+    upload_file(access_token, path, file_to)
 
 
 
@@ -29,7 +29,7 @@ def add_to_dropbox(path, name):
 ## get from dropbox ##
 ######################
 
-def downloadFile(access_token, file_from, file_to):
+def download_file(access_token, file_from, file_to):
     dbx = dropbox.Dropbox(access_token)
 
     if file_from != '' and file_to != '':
@@ -46,4 +46,4 @@ def downloadFile(access_token, file_from, file_to):
 def get_from_dropbox(name, destination_path):
     file_from = '/test/' + name
     access_token = 'sl.BrT1pr0bsC3MF7e0cfMwsGFWN9Q2LCpuyv6bKvuE-vmBxE1NrW8IFfFJxYTSGgn3dxbD0vPMGW07tzKWlt8dYHWpnMA9N0xEvfUp94oqsmJsOo375NSY46HLW7jUhlzuOx-nttSv0Rhj'
-    downloadFile(access_token, file_from, destination_path)
+    download_file(access_token, file_from, destination_path)
