@@ -24,7 +24,7 @@ drop_model = api.model("drop",{
     'audio_url' : fields.String,
     'date' : fields.Date,
     '_users':fields.List(fields.Nested(user_model)),
-    '_precise_adresses':fields.List(fields.Nested(precise_adress_model)),
+    '_precise_adress':fields.List(fields.Nested(precise_adress_model)),
     '_theme':fields.List(fields.Nested(theme_model)),
 })
 
