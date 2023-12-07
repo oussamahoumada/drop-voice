@@ -6,7 +6,7 @@ from sqlalchemy import and_, or_, delete
 
 from ..extensions import db
 from ..models.models import drop, precise_adress
-from ..services.cloud_storage import add_to_dropbox, get_from_dropbox
+from ..services.cloud_storage import add_to_dropbox, get_image_url
 from ..models.drop.drop_api_model import drop_input_model, get_all_drop_model
 
 drop_ns = Namespace("drop/")
@@ -39,11 +39,14 @@ class DropAPI(Resource):
             req = precise_adress.query.filter(and_(precise_adress.longitude==long, precise_adress.latitude==lat))
         
         pa_id = req.first().precise_adress_id
+        
+        image_url_from_dp = get_image_url(image_url)
+        audio_url_from_dp = get_image_url(audio_url)
 
         dr = drop(
             title = drop_ns.payload['title'],
-            image_url = image_url,
-            audio_url = audio_url,
+            image_url = image_url_from_dp,
+            audio_url = audio_url_from_dp,
             date = drop_ns.payload['date'],
             ref_precise_adress = pa_id,
             ref_user = drop_ns.payload['ref_user'],
@@ -58,12 +61,12 @@ class DropAPI(Resource):
 class DropAPI(Resource):
     @drop_ns.marshal_list_with(get_all_drop_model)
     def get(self):
-        drops = drop.query.all()
+        '''drops = drop.query.all()
         for dr in drops:
             dr.audio = load(dr.image_url)
-            dr.image = load(dr.audio_url)
+            dr.image = load(dr.audio_url)'''
 
-        return drops
+        return drop.query.all()
 
 def upload(file, name):
     _, encoded_data = file.split(',', 1)
@@ -80,7 +83,7 @@ def upload(file, name):
        os.remove(filepath)
 
 
-def load(name):
+'''def load(name):
     filename = name
     filepath = os.path.join("./", filename)
 
@@ -95,4 +98,4 @@ def load(name):
     if os.path.exists(filepath):
        os.remove(filepath)
     
-    return data_url
+    return data_url'''

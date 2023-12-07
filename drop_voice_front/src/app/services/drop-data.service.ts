@@ -14,7 +14,7 @@ export class DropDataService {
     private http: HttpClient
   ) {}
 
-  public post_drop(body: any): Observable<any> {
+  public postDrop(body: any): Observable<any> {
     const url = this.urlService.getUrl('/drop/add_drop');
 
     return this.http.post(url, body, { headers: corsHeaders });
