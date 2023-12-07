@@ -16,7 +16,7 @@
           <a [href]="fileUrl" download="file.mp3">DownloadFile</a>
         </div>
         <div>
-          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('audioCtrl')?.valid">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('audio')?.valid">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -28,14 +28,14 @@
       <form [formGroup]="audioForm" class="center-content">
         <mat-form-field>
           <mat-label>Titre</mat-label>
-          <input matInput formControlName="titleCtrl" placeholder="Titre" required>
-          <mat-error *ngIf="audioForm.get('titleCtrl')?.hasError('required')">
+          <input matInput formControlName="title" placeholder="Titre" required>
+          <mat-error *ngIf="audioForm.get('title')?.hasError('required')">
             Veuillez insérer un titre
           </mat-error>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('titleCtrl')?.valid">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('title')?.valid">Suivant</button>
         </div>
       </form>
 
@@ -48,13 +48,13 @@
       <form [formGroup]="audioForm" class="center-content">
         <mat-form-field>
           <mat-label>Thème</mat-label>
-          <select matNativeControl formControlName="themeCtrl">
+          <select matNativeControl formControlName="theme">
             <option *ngFor="let theme of themes" value='{{theme.libelle}}'>{{theme.libelle}}</option>
           </select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('themeCtrl')?.valid">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('theme')?.valid">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -75,7 +75,7 @@
 
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('imageCtrl')?.valid">Suivant</button>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('image')?.valid">Suivant</button>
         </div>
       </form>
     </mat-step>

@@ -9,3 +9,4 @@ flask-cors==4.0.0
 Flask-SQLAlchemy==3.1.1
 flask-restx==1.2.0
 mysqlclient==2.2.0
+dropbox==11.36.2
