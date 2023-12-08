@@ -23,6 +23,8 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { CommonModule } from '@angular/common';
 import { MyAccountComponent } from './components/my-account/my-account.component';
+import { UserRecordsComponent } from './components/user/user-records/user-records.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { MyAccountComponent } from './components/my-account/my-account.component
     LoginComponent,
     RegisterComponent,
     StepperComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    UserRecordsComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     FormsModule,

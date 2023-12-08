@@ -11,13 +11,17 @@
 
 mat-card-content {
     margin-top: 5%;
+    text-align: center;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 2%;
+img {
+    max-width: 60%;
+    width: 40%;
+}
+
+.title-page {
+    margin-top: 5%;
+    text-align: center;
 }
 
 .nav mat-grid-tile {

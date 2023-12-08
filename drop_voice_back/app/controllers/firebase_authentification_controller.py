@@ -86,7 +86,7 @@ class FirebaseAuthentificationLogout(Resource):
    
     @auth_ns.expect(logout_model)
     def post(self) -> json:
-        token: str = auth_ns.payload['id_token']
+        token: str = auth_ns.payload['idToken']
         decoded_token = TokenService.decode_token(self, token)
 
         if 'error' in decoded_token:

@@ -33,3 +33,7 @@ mat-card, mat-card-content, form{
 .btn-register {
   margin-top: 2%;
 }
+
+app-nav-bar{
+  right: 5%;
+}

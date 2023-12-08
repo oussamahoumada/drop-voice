@@ -28,7 +28,8 @@
           </mat-form-field>
         </p>
         <div class="button">
-          <button (click)="Register()" mat-raised-button>Créer un compte</button>
+          <button (click)="register()" mat-raised-button>Créer un compte</button>
+          <button class="btn-login" [routerLink]="['/login']" mat-raised-button>J'ai déjà un compte</button>
         </div>
       </form>
     </mat-card-content>

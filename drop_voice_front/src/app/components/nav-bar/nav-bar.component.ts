@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,15 +10,14 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class NavBarComponent {
 
-  constructor(
-    private cookieService: CookieService
+  public constructor(
+    private cookieService: CookieService,
+    public authService: AuthService
   ) {}
 
-  /**
-   * @returns boolean
-   */
-  public isLogged(): boolean
+  public handleLogout(): void
   {
-    return Boolean(this.cookieService.get('token'))
+    const token: string = this.cookieService.get('token')
+    this.authService.logout(token)
   }
 }

@@ -1,8 +1,9 @@
 <!-- Nav bar -->
 <mat-grid-list class="nav" cols="1" rowHeight="10vh">
-  <mat-grid-tile
-    ><app-nav-bar style="position: absolute; right: 20px"></app-nav-bar
-  ></mat-grid-tile>
+  <mat-grid-tile>
+    <app-nav-bar style="position: absolute; right: 20px">
+    </app-nav-bar>
+  </mat-grid-tile>
 </mat-grid-list>
 
 <!-- Map + Stepper Drop -->
@@ -23,7 +24,7 @@
    <button mat-button (click)='toggleStepperComponent()'>
       <mat-icon>headset</mat-icon>
     </button>
-    <button mat-button (click)='toggleStepperComponent()'>
+    <button mat-button (click)='toggleStepperComponent()' [disabled]="!isLogged">
   	  <mat-icon>mic</mat-icon>
     </button>
   </mat-grid-tile>

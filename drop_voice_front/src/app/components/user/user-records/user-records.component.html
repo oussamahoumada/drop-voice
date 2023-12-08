@@ -1,0 +1,26 @@
+<mat-grid-list class="nav" cols="1" rowHeight="10vh">
+  <mat-grid-tile>
+    <app-nav-bar style="position: absolute; right: 20px">
+    </app-nav-bar>
+  </mat-grid-tile>
+</mat-grid-list>
+<div>
+    <div layout="row" class="main-div">
+        <h1 class="title-page">Mes enregistrements</h1>
+        <div layout-align="center" *ngFor="let drop of dropsData">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>{{ drop.title }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <img mat-card-image [src]="drop.imageUrl" alt="Photo" />
+                    <h4>Le thème : {{ drop.theme }}</h4>
+                    <app-lecteur-audio [audioUrl]="drop.audio"></app-lecteur-audio>
+                    <button mat-mini-fab color="warn" aria-label="Supprimer l'enregistrement" (click)="openConfirmationDialog(drop.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
