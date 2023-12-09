@@ -7,7 +7,7 @@ from sqlalchemy import and_, or_, delete
 from ..extensions import db
 from ..models.models import drop, precise_adress
 from ..services.cloud_storage import add_to_dropbox, get_image_url
-from ..models.drop.drop_api_model import drop_input_model, get_all_drop_model
+from ..models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
 
 drop_ns = Namespace("drop/")
 
@@ -56,6 +56,16 @@ class DropAPI(Resource):
         db.session.commit()
 
         return "success", 200
+    
+@drop_ns.route("/delete_drop/<int:id>")
+class DropAPI(Resource): 
+    def delete(self,id):
+        drop_del = delete(drop).where(drop.drop_id==id)
+        db.session.execute(drop_del)
+        db.session.commit()
+
+        return "success", 200
+
 
 @drop_ns.route("/get_all_drops")
 class DropAPI(Resource):
