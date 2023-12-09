@@ -3,10 +3,25 @@
     <mat-icon style="scale: 3">menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/my-account']" [disabled]="!authService.isLogged()"><mat-icon>account_circle</mat-icon>Mon compte</button>
-    <button mat-menu-item [routerLink]="['/records']" [disabled]="!authService.isLogged()"><mat-icon>save</mat-icon>Mes enregistrements</button>
-    <button *ngIf="authService.isLogged()" mat-menu-item [routerLink]="['/home']">Map<mat-icon>place</mat-icon></button>
-    <button *ngIf="authService.isLogged()" mat-menu-item (click)="handleLogout()"><mat-icon>logout</mat-icon>Logout</button>
-    <button *ngIf="!authService.isLogged()" mat-menu-item [routerLink]="['/login']"><mat-icon>login</mat-icon>Login</button>
+    <button mat-menu-item [routerLink]="['/my-account']" [disabled]="!authService.isLogged()">
+      <mat-icon>account_circle</mat-icon>
+      Mon compte
+    </button>
+    <button mat-menu-item [routerLink]="['/records']" [disabled]="!authService.isLogged()">
+      <mat-icon>save</mat-icon>
+      Mes enregistrements
+    </button>
+    <button *ngIf="authService.isLogged()" mat-menu-item [routerLink]="['/home']">
+      <mat-icon>place</mat-icon>
+        Map
+    </button>
+    <button *ngIf="authService.isLogged()" mat-menu-item (click)="handleLogout()">
+      <mat-icon>logout</mat-icon>
+        Logout
+    </button>
+    <button *ngIf="!authService.isLogged()" mat-menu-item [routerLink]="['/login']">
+      <mat-icon>login</mat-icon>
+        Login
+    </button>
   </mat-menu>
 </div>

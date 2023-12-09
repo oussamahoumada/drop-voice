@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -12,8 +12,12 @@ import { ThemeInterface } from 'src/app/interfaces/theme/theme-interface';
   styleUrls: ['./stepper.component.css'],
 })
 export class StepperComponent implements OnInit {
+  @ViewChild('recordButton') recordButton!: ElementRef;
+
   public selectedImage?: File;
   public selectedImageName?: string;
+
+  public isRecording: boolean = false;
 
   public isLinear: boolean = false;
   public fileUrl: SafeResourceUrl|null = null;
@@ -48,6 +52,7 @@ export class StepperComponent implements OnInit {
   public startRecording(): void
   {
     this.audioRecorderService.startRecording();
+    this.isRecording = true;
   }
 
   public onImageSelected(event: any): void
@@ -59,6 +64,8 @@ export class StepperComponent implements OnInit {
 
   public stopRecording(): void
   {
+    this.isRecording = false;
+
     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {
       if (output instanceof Blob) {
         this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(output));
@@ -80,7 +87,7 @@ export class StepperComponent implements OnInit {
       })
 
     } else {
-      alert('Veuillez completer le formulaire');
+      alert('Veuillez remplir le formulaire');
     }
   }
 }

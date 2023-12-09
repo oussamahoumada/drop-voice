@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DropData } from '../interfaces/drop/drop-interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -47,12 +48,22 @@ export class DropDataService {
     },
   ];
 
+  public drops$: BehaviorSubject<DropData[]> = new BehaviorSubject(this.data);
+
   getData(): DropData[] {
     return this.data;
   }
 
-  public removeDrop(idDrop: number): void
+  private removeDropInDom(drop: DropData): void
   {
+    const index = this.data.indexOf(drop, 1);
+  
+    this.data.splice(index, 1);
+    this.drops$.next(this.data);
+  }
 
+  public removeDrop(drop: DropData): void
+  {
+    this.removeDropInDom(drop)
   }
 }

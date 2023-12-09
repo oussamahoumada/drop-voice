@@ -1,4 +1,4 @@
 export interface UserInterface {
-    name: string,
-    totalDrops: number
+    name: string;
+    totalDrops: number;
 }

@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { corsHeaders } from 'src/app/cors_validation/corsValidation';
@@ -13,12 +13,20 @@ export class AuthService {
 
   private urlAuth: string = '/auth';
 
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLogged());
+  public isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private urlService: UrlGeneratorService,
     private router: Router,
     private cookieService: CookieService
   ) {
+  }
+
+  public setLogged(isLogged: boolean): void
+  {
+    this.isLoggedInSubject.next(isLogged)
   }
 
   /**
@@ -58,7 +66,7 @@ export class AuthService {
         
         if (success.success) {
           this.cookieService.deleteAll();
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('');
         }
       },
       error: (error: any) => {

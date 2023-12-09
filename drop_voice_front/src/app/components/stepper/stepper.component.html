@@ -6,14 +6,12 @@
       <form [formGroup]="audioForm" class="center-content">
         <mat-label>Enregistrer votre audio</mat-label>
         <div fxLayout="row" fxLayoutGap="8px">
-          <button mat-flat-button (click)="startRecording()">
+          <button mat-mini-fab color="basic" [class.recording]="isRecording" (click)="startRecording()">
             <mat-icon>mic</mat-icon>
           </button>
-          <button mat-flat-button (click)="stopRecording()">
+          <button mat-mini-fab color="basic" (click)="stopRecording()">
             <mat-icon>stop</mat-icon>
           </button>
-
-          <a [href]="fileUrl" download="file.mp3">DownloadFile</a>
         </div>
         <div>
           <button mat-raised-button matStepperNext color="primary" [disabled]="!audioForm.get('audioCtrl')?.valid">Suivant</button>

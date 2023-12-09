@@ -31,7 +31,7 @@ export class UserRecordsComponent implements OnInit {
     this.dropsData = this.dropService.getData()
   }
 
-  public openConfirmationDialog(dropId: number): void
+  public openConfirmationDialog(drop: DropData): void
   {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
@@ -40,8 +40,8 @@ export class UserRecordsComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        console.log(dropId)
-        this.dropService.removeDrop(dropId)
+        console.log(drop)
+        this.dropService.removeDrop(drop)
       }
     });
   }
