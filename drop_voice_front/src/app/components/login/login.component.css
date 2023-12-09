@@ -1,27 +1,53 @@
-*{
+* {
   width: 100%;
   text-align: -webkit-center;
 }
 
-mat-card-content, form{
-  padding:5%;
+mat-card-content,
+form {
+  padding: 5%;
 }
 
-mat-card, div{
+mat-card,
+div {
   height: 100%;
 }
 
-p{
+p {
   height: 25%;
 }
-mat-card-title{
+mat-card-title {
   height: 20%;
   padding: 70px 0;
 }
-mat-card-content{
+mat-card-content {
   height: 80%;
 }
-mat-card, mat-card-content, form{
-  padding:5%;
+mat-card,
+mat-card-content,
+form {
+  padding: 5%;
 }
 
+.background {
+  background-image: url("https://images.unsplash.com/photo-1614107151491-6876eecbff89?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  /* Set background size to cover the entire div */
+  background-size: cover;
+  /* Center the background image */
+  background-position: center;
+  /* Ensure the background is fixed */
+  background-attachment: fixed;
+  /* Add some padding for better visual appearance (optional) */
+  padding: 20px;
+}
+
+.transparent-div {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* 0.5 is the alpha channel for 50% transparency */
+  /* Add some padding for better visual appearance (optional) */
+  padding: 20px;
+}

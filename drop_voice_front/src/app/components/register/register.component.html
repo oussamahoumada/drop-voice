@@ -1,34 +1,60 @@
-<div>
-  <mat-card>
-    <mat-card-title>registration</mat-card-title>
+<div class="background">
+  <mat-card class="transparent-div">
+    <mat-card-title>Registration</mat-card-title>
     <mat-card-content>
       <form [formGroup]="registrationForm">
         <p>
           <mat-form-field appearance="outline">
-            <input type="text" matInput placeholder="first_name" formControlName="first_name">
+            <input
+              type="text"
+              matInput
+              placeholder="first_name"
+              formControlName="first_name"
+            />
             <mat-icon matSuffix>text_fields</mat-icon>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
-            <input type="text" matInput placeholder="last_name" formControlName="last_name">
+            <input
+              type="text"
+              matInput
+              placeholder="last_name"
+              formControlName="last_name"
+            />
             <mat-icon matSuffix>text_fields</mat-icon>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
-            <input type="text" matInput placeholder="Mail" formControlName="email">
+            <input
+              type="text"
+              matInput
+              placeholder="Mail"
+              formControlName="email"
+            />
             <mat-icon matSuffix>alternate_email</mat-icon>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
-            <input type="password" matInput placeholder="Password" formControlName="password">
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+            />
             <mat-icon matSuffix>vpn_key</mat-icon>
           </mat-form-field>
         </p>
         <div class="button">
-          <button (click)="Register()" mat-button>register</button>
+          <button
+            (click)="Register()"
+            style="background-color: rgb(171, 171, 171)"
+            mat-button
+          >
+            Register
+          </button>
         </div>
       </form>
     </mat-card-content>
