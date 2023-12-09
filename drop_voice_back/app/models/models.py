@@ -1,4 +1,4 @@
-from ..extensions import db 
+from extensions import db 
 
 class precise_adress(db.Model):
     precise_adress_id = db.Column(db.Integer, primary_key=True)

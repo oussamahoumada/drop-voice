@@ -14,7 +14,7 @@ services:
             - database-geo-voice:database-geo-voice
         networks:
             - python
-        
+
     database-geo-voice:
         container_name: database-geo-voice
         image: mysql:latest
@@ -51,4 +51,3 @@ networks:
 volumes:
     dbdata:
         driver: local
-
