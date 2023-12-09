@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,6 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 const materials: any = [
   MatMenuModule,
@@ -34,7 +34,7 @@ const materials: any = [
   MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
-  MatToolbarModule
+  MatToolbarModule,
 ];
 @NgModule({
   imports: [materials],
