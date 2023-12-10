@@ -4,7 +4,8 @@
 __pycache__
 .env.local
 .env
-/certificats
+certificats
+
 config-firebase-admin.json
 
 # Node

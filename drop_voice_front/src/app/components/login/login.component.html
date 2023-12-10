@@ -1,3 +1,9 @@
+<mat-grid-list class="nav" cols="1" rowHeight="10vh">
+  <mat-grid-tile>
+      <app-nav-bar>
+      </app-nav-bar>
+  </mat-grid-tile>
+</mat-grid-list>
 <div class="background">
   <mat-card class="transparent-div">
     <mat-card-title>Login</mat-card-title>
@@ -26,13 +32,10 @@
           </mat-form-field>
         </p>
         <div class="button">
-          <button
-            (click)="authentication()"
-            style="background-color: rgb(171, 171, 171)"
-            mat-button
-          >
-            Login
+          <button (click)="authentication()" mat-raised-button style="background-color: rgb(171, 171, 171)"mat-button>
+            Se connecter
           </button>
+          <button class="btn-register" [routerLink]="['/register']" mat-raised-button>Créer un compte</button>
         </div>
       </form>
     </mat-card-content>

@@ -9,6 +9,10 @@ import { MyCardComponent } from './components/my-card/my-card.component';
 import { LecteurAudioComponent } from './components/lecteur-audio/lecteur-audio.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { UserRecordsComponent } from './components/user/user-records/user-records.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 
 //modules
 import { NgModule, isDevMode } from '@angular/core';
@@ -21,9 +25,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgAudioRecorderModule } from 'ng-audio-recorder';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { CommonModule } from '@angular/common';
 import { AngMusicPlayerModule } from 'ang-music-player';
 
-import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,10 @@ import { CommonModule } from '@angular/common';
     LecteurAudioComponent,
     LoginComponent,
     RegisterComponent,
-    StepperComponent
+    StepperComponent,
+    MyAccountComponent,
+    UserRecordsComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     FormsModule,

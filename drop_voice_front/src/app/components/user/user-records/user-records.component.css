@@ -1,0 +1,29 @@
+.card {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.main-div {
+    width: 100%;
+    justify-content: center;
+}
+
+mat-card-content {
+    margin-top: 5%;
+    text-align: center;
+}
+
+img {
+    max-width: 60%;
+    width: 40%;
+}
+
+.title-page {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.nav mat-grid-tile {
+    background: rgb(54, 0, 135);
+}

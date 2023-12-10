@@ -1,0 +1,22 @@
+<mat-grid-list class="nav" cols="1" rowHeight="10vh">
+    <mat-grid-tile>
+        <app-nav-bar style="position: absolute; right: 20px">
+        </app-nav-bar>
+    </mat-grid-tile>
+</mat-grid-list>
+<div>
+    <div layout="row" class="main-div">
+        <div layout-align="center">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Mon profil</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Bienvenue {{ user.name }}</p>
+                    <p>Nombre total d'enregistrement: {{ user.totalDrops }}</p>
+                    <h1><mat-icon>headset</mat-icon></h1>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
