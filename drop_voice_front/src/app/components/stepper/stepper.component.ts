@@ -1,13 +1,14 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
+import { MapService } from 'src/app/services/map.service';
+import { getCurrentDate } from 'src/app/helpers/date_formatter';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ThemeApiService } from 'src/app/services/theme-api.service';
+import { DropDataService } from 'src/app/services/drop-data.service';
+import { ThemeInterface } from 'src/app/interfaces/theme/theme-interface';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { MapService } from 'src/app/services/map.service';
-import { ThemeApiService } from 'src/app/services/theme-api.service';
-import { ThemeInterface } from 'src/app/interfaces/theme/theme-interface';
-import { getCurrentDate } from 'src/app/helpers/date_formatter';
-import { DropDataService } from 'src/app/services/drop-data.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-stepper',
@@ -26,6 +27,9 @@ export class StepperComponent implements OnInit {
   public fileUrl: SafeResourceUrl | null = null;
 
   public themes: ThemeInterface[] = [];
+
+  public image: any;
+  public audio: any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -60,20 +64,19 @@ export class StepperComponent implements OnInit {
     this.audioRecorderService.startRecording();
     this.isRecording = true;
   }
-  public image: any;
-  public audio: any;
+
   public onImageSelected(event: any): void {
     const file = (event.target as HTMLInputElement).files?.[0];
-    //this.audioForm.patchValue({ image: file });
-    this.selectedImageName = file ? file.name : undefined;
-    //console.log(event.target.files[0]);
     var reader = new FileReader();
+
+    this.selectedImageName = file ? file.name : undefined;
     reader.readAsDataURL(event.target.files[0]);
+
     this.audioForm.patchValue({ image_url: event.target.files[0].name });
+
     reader.onload = (event: any) => {
       this.image = event.target.result;
       this.audioForm.patchValue({ image: event.target.result });
-      //console.log(this.image);
     };
   }
 
@@ -113,7 +116,15 @@ export class StepperComponent implements OnInit {
         console.log(this.audioForm.value);
         this.dropService
           .postDrop(this.audioForm.value)
-          .subscribe((res) => console.log(res));
+          .subscribe({
+            next: (response: string) => {
+              if (response === 'success') {
+                Swal.fire('Success', 'Votre enregistrement à été bien sauvegardé', 'success');
+              } else {
+                Swal.fire('error', 'Une erreur est survenue', 'error');
+              }
+            }
+          });
       });
     } else {
       alert('Veuillez remplir le formulaire');

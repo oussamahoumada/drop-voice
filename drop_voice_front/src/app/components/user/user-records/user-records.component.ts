@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CookieService } from 'ngx-cookie-service';
 import { DropData } from 'src/app/interfaces/drop/drop-interface';
 import { DropDataService } from 'src/app/services/drop-data.service';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user-records',
@@ -14,7 +14,6 @@ export class UserRecordsComponent implements OnInit {
   public dropsData: DropData[] = [];
 
   public constructor (
-    private cookieService: CookieService,
     private dropService: DropDataService,
     private dialog: MatDialog
   ) {
@@ -24,11 +23,25 @@ export class UserRecordsComponent implements OnInit {
     this.getUserRecords();
   }
 
-  private getUserRecords() {
-    const idUser: string = this.cookieService.get('id')
-    const token: string = this.cookieService.get('token')
+  public drops$: BehaviorSubject<DropData[]> = new BehaviorSubject(this.dropsData);
 
-    this.dropsData = this.dropService.getData()
+  public removeDropInDom(drop: DropData): void
+  {
+    const index = this.dropsData.indexOf(drop, 1);
+  
+    this.dropsData.splice(index, 1);
+    this.drops$.next(this.dropsData);
+  }
+
+  private getUserRecords() {
+    this.dropService.getDropsByUser().subscribe({
+      next: (data: DropData[]) => {
+        this.dropsData = data;
+      },
+      error: () => {
+        alert('Une erreur est survenu')
+      }
+    })
   }
 
   public openConfirmationDialog(drop: DropData): void
@@ -40,8 +53,16 @@ export class UserRecordsComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        console.log(drop)
-        this.dropService.removeDrop(drop)
+        this.dropService.removeDrop(drop).subscribe({
+          next: (response: any) => {
+            if (response === 'success') {
+              this.removeDropInDom(drop)
+            }
+          },
+          error: (error: any) => {
+            console.error(error)
+          }
+        })
       }
     });
   }

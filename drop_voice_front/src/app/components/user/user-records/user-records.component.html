@@ -8,14 +8,14 @@
     <div layout="row" class="main-div">
         <h1 class="title-page">Mes enregistrements</h1>
         <div layout-align="center" *ngFor="let drop of dropsData">
-            <mat-card id="{{ drop.id }}" class="card">
+            <mat-card id="{{ drop.drop_id }}" class="card">
                 <mat-card-header>
                     <mat-card-title>{{ drop.title }}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <img mat-card-image [src]="drop.imageUrl" alt="Photo" />
+                    <img mat-card-image [src]="drop.image_url" alt="Photo" />
                     <h4>Le thème : {{ drop.theme }}</h4>
-                    <app-lecteur-audio [audioUrl]="drop.audio"></app-lecteur-audio>
+                    <app-lecteur-audio [audioUrl]="drop.audio_url"></app-lecteur-audio>
                     <button mat-mini-fab color="warn" aria-label="Supprimer l'enregistrement" (click)="openConfirmationDialog(drop)">
                         <mat-icon>delete</mat-icon>
                     </button>

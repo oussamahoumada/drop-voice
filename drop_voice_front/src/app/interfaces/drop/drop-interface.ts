@@ -1,9 +1,9 @@
 export interface DropData {
-  id: number;
-  imageUrl: string;
+  drop_id: number;
+  image_url: string;
   title: string;
   theme: string;
-  audio: string;
+  audio_url: string;
   longitude: number;
   latitude: number;
 }

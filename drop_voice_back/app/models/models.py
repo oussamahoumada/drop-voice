@@ -24,6 +24,7 @@ class drop(db.Model):
     title = db.Column(db.String(250))
     date = db.Column(db.Date)
     ref_user = db.Column(db.ForeignKey("user.user_id"))
+    ref_theme = db.Column(db.ForeignKey("theme.libelle"))
     ref_precise_adress = db.Column(db.ForeignKey("precise_adress.precise_adress_id"))
 
     _user = db.relationship("User", back_populates="_drops")
