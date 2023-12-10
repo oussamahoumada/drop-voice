@@ -41,7 +41,7 @@ export class AuthService {
   {
     let url = this.urlService.getUrl(this.urlAuth + '/login');
 
-    return this.http.post(url, body, { headers: corsHeaders, withCredentials: true });
+    return this.http.post(url, body, { headers: corsHeaders });
   }
 
   public registration(body: any): Observable<any>
