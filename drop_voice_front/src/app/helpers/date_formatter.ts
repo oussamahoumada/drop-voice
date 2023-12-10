@@ -5,5 +5,6 @@ export function getCurrentDate() {
     currentDate.getMonth() + 1,
     currentDate.getDate(),
   ].join('-');
+
   return result;
 }
