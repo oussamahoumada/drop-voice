@@ -10,3 +10,4 @@ Flask-SQLAlchemy==3.1.1
 flask-restx==1.2.0
 mysqlclient==2.2.0
 flask_sslify==0.1.5
+dropbox==11.36.2

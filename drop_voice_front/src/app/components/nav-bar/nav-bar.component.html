@@ -1,7 +1,8 @@
-<div>
+<div style="display: flex; justify-content: space-around">
   <button mat-button [matMenuTriggerFor]="menu">
-    <mat-icon style="scale: 3">menu</mat-icon>
+    <mat-icon style="scale: 2.5; color: #c76b36">menu</mat-icon>
   </button>
+
   <mat-menu #menu="matMenu">
     <button mat-menu-item [routerLink]="['/my-account']" [disabled]="!authService.isLogged()">
       <mat-icon>account_circle</mat-icon>

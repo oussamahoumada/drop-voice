@@ -4,25 +4,37 @@
       </app-nav-bar>
   </mat-grid-tile>
 </mat-grid-list>
-<div>
-  <mat-card>
+<div class="background">
+  <mat-card class="transparent-div">
     <mat-card-title>Login</mat-card-title>
     <mat-card-content>
       <form [formGroup]="loginForm">
         <p>
           <mat-form-field appearance="outline">
-            <input type="text" matInput placeholder="Mail" formControlName="email">
+            <input
+              type="text"
+              matInput
+              placeholder="Mail"
+              formControlName="email"
+            />
             <mat-icon matSuffix>alternate_email</mat-icon>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
-            <input type="password" matInput placeholder="Password" formControlName="password">
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+            />
             <mat-icon matSuffix>vpn_key</mat-icon>
           </mat-form-field>
         </p>
         <div class="button">
-          <button (click)="authentication()" mat-raised-button>Se connecter</button>
+          <button (click)="authentication()" mat-raised-button style="background-color: rgb(171, 171, 171)"mat-button>
+            Se connecter
+          </button>
           <button class="btn-register" [routerLink]="['/register']" mat-raised-button>Créer un compte</button>
         </div>
       </form>

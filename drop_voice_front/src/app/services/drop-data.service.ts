@@ -1,11 +1,27 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { DropData } from '../interfaces/drop/drop-interface';
 import { BehaviorSubject } from 'rxjs';
+import { UrlGeneratorService } from './url-generator.service';
+import { corsHeaders } from 'src/app/cors_validation/corsValidation';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class DropDataService {
+  constructor(
+    private urlService: UrlGeneratorService,
+    private http: HttpClient
+  ) {}
+
+  public postDrop(body: any): Observable<any> {
+    const url = this.urlService.getUrl('/drop/add_drop');
+
+    return this.http.post(url, body, { headers: corsHeaders });
+  }
+
   private data: DropData[] = [
     {
       id: 1,
