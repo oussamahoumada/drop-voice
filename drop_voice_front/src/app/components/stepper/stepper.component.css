@@ -30,3 +30,17 @@ mat-toolbar {
     margin-top: 0%;
     margin-bottom: 2%;
 }
+
+.recording {
+    animation: pulse 0.5s infinite alternate;
+    background-color: red;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}

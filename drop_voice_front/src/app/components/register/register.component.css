@@ -19,6 +19,8 @@ p {
 mat-card-title {
   height: 20%;
   padding: 70px 0;
+  align-items: center;
+  text-align: center;
 }
 mat-card-content {
   height: 80%;
@@ -50,4 +52,8 @@ form {
   ); /* 0.5 is the alpha channel for 50% transparency */
   /* Add some padding for better visual appearance (optional) */
   padding: 20px;
+}
+
+.btn-login {
+  margin-top: 2%;
 }

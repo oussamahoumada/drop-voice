@@ -1,13 +1,12 @@
 import os
 import base64
-from flask import jsonify
 from flask_restx import Resource, Namespace
-from sqlalchemy import and_, or_, delete
+from sqlalchemy import and_, delete
 
-from ..extensions import db
-from ..models.models import drop, precise_adress
-from ..services.cloud_storage import add_to_dropbox, get_image_url
-from ..models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
+from extensions import db
+from models.models import drop, precise_adress
+from services.cloud_storage import add_to_dropbox, get_image_url
+from models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
 
 drop_ns = Namespace("drop/")
 
@@ -71,10 +70,6 @@ class DropAPI(Resource):
 class DropAPI(Resource):
     @drop_ns.marshal_list_with(get_all_drop_model)
     def get(self):
-        '''drops = drop.query.all()
-        for dr in drops:
-            dr.audio = load(dr.image_url)
-            dr.image = load(dr.audio_url)'''
 
         return drop.query.all()
 
@@ -91,21 +86,3 @@ def upload(file, name):
 
     if os.path.exists(filepath):
        os.remove(filepath)
-
-
-'''def load(name):
-    filename = name
-    filepath = os.path.join("./", filename)
-
-    get_from_dropbox(filename, filepath)
-
-    with open(filepath, 'rb') as file:
-        image_data = file.read()
-
-    encoded_data = base64.b64encode(image_data).decode('utf-8')
-    data_url = f'data:image/jpg;base64,{encoded_data}'
-
-    if os.path.exists(filepath):
-       os.remove(filepath)
-    
-    return data_url'''

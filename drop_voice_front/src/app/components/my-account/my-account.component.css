@@ -1,0 +1,25 @@
+.card {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.main-div {
+    width: 100%;
+    justify-content: center;
+}
+
+mat-card-content {
+    margin-top: 5%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2%;
+}
+
+.nav mat-grid-tile {
+    background: rgb(54, 0, 135);
+}

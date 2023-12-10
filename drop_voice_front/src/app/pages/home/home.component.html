@@ -34,17 +34,17 @@
 <!-- Listen + Record  -->
 <mat-grid-list class="features" cols="2" rowHeight="10vh">
   <mat-grid-tile>
-    <button mat-button (click)="toggleStepperComponent()">
+    <button mat-mini-fab color="basic" (click)="toggleStepperComponent()">
       <mat-icon style="margin-top: 5px; padding: 0; scale: 2; color: #c76b36"
         >headset</mat-icon
       >
     </button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button mat-button (click)="toggleStepperComponent()">
-      <mat-icon style="margin: 0; padding: 0; scale: 2; color: #c76b36"
-        >mic</mat-icon
-      >
+    <button mat-mini-fab color="basic" (click)="toggleStepperComponent()" [disabled]="!isLogged">
+      <mat-icon style="margin: 0; padding: 0; scale: 2; color: #c76b36">
+        mic
+      </mat-icon>
     </button>
   </mat-grid-tile>
 </mat-grid-list>

@@ -1,4 +1,4 @@
-from ..extensions import db 
+from extensions import db 
 
 class precise_adress(db.Model):
     precise_adress_id = db.Column(db.Integer, primary_key=True)
@@ -10,12 +10,12 @@ class precise_adress(db.Model):
 class theme(db.Model):
     libelle = db.Column(db.String(250), primary_key=True)
 
-class user(db.Model):
+class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250))
     mail = db.Column(db.String(250))
 
-    _drops = db.relationship("drop",back_populates="_user")
+    _drops = db.relationship("drop", back_populates="_user")
 
 class drop(db.Model):
     drop_id = db.Column(db.Integer, primary_key=True)
@@ -25,7 +25,6 @@ class drop(db.Model):
     date = db.Column(db.Date)
     ref_user = db.Column(db.ForeignKey("user.user_id"))
     ref_precise_adress = db.Column(db.ForeignKey("precise_adress.precise_adress_id"))
-    ref_theme = db.Column(db.ForeignKey("theme.libelle"))
 
-    _user = db.relationship("user",back_populates="_drops")
+    _user = db.relationship("User", back_populates="_drops")
     _precise_adress = db.relationship("precise_adress",back_populates="_drops")

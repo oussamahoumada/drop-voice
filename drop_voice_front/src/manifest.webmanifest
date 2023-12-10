@@ -1,6 +1,6 @@
 {
-  "name": "drop_voice_front",
-  "short_name": "drop_voice_front",
+  "name": "GeoVoice",
+  "short_name": "GeoVoice",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

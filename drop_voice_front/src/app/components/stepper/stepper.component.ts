@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -15,8 +15,12 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./stepper.component.css'],
 })
 export class StepperComponent implements OnInit {
+  @ViewChild('recordButton') recordButton!: ElementRef;
+
   public selectedImage?: File;
   public selectedImageName?: string;
+
+  public isRecording: boolean = false;
 
   public isLinear: boolean = false;
   public fileUrl: SafeResourceUrl | null = null;
@@ -49,11 +53,12 @@ export class StepperComponent implements OnInit {
     date: [getCurrentDate(), Validators.required],
     latitude: [''],
     longitude: [''],
-    ref_user: 1,
+    ref_user: this.cookieService.get('id'),
   });
 
   public startRecording(): void {
     this.audioRecorderService.startRecording();
+    this.isRecording = true;
   }
   public image: any;
   public audio: any;
@@ -72,31 +77,32 @@ export class StepperComponent implements OnInit {
     };
   }
 
-  public stopRecording(): void {
-    this.audioRecorderService
-      .stopRecording(OutputFormat.WEBM_BLOB)
-      .then((output) => {
-        if (output instanceof Blob) {
-          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            window.URL.createObjectURL(output)
-          );
-          var reader = new FileReader();
-          reader.readAsDataURL(output);
-          reader.onload = (event: any) => {
-            this.audio = event.target.result;
-            const id: string =
-              'id' + Math.random().toString(16).slice(2) + '.mp3';
-            this.audioForm.patchValue({ audio: event.target.result });
-            this.audioForm.patchValue({ audio_url: id });
-            //console.log(this.audio);
-          };
+  public stopRecording(): void
+  {
+    this.isRecording = false;
+
+    this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {
+      if (output instanceof Blob) {
+        this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          window.URL.createObjectURL(output)
+        );
+
+        var reader = new FileReader();
+        reader.readAsDataURL(output);
+
+        reader.onload = (event: any) => {
+          this.audio = event.target.result;
+          const id: string = 'id' + Math.random().toString(16).slice(2) + '.mp3';
+          this.audioForm.patchValue({ audio: event.target.result });
+          this.audioForm.patchValue({ audio_url: id });
         }
-        //this.audioForm.patchValue({ audio: output });
-        console.log(output);
-      })
-      .catch((errorCase) => {
-        console.error(errorCase);
-      });
+
+        this.audioForm.patchValue({ audioCtrl: output });
+        console.log(output)
+      }
+    }).catch(errorCase => {
+      console.error(errorCase)
+    });
   }
 
   public submitForm(): void {
@@ -110,17 +116,7 @@ export class StepperComponent implements OnInit {
           .subscribe((res) => console.log(res));
       });
     } else {
-      alert('Veuillez completer le formulaire');
+      alert('Veuillez remplir le formulaire');
     }
-    /*if (this.audioForm.valid) {
-      this.mapService.getCurrentPosition().subscribe((map) => {
-        this.audioForm.patchValue({ latitude: map.latitude });
-        this.audioForm.patchValue({ longitude: map.longitude });
-        this.audioForm.patchValue({ image: this.image });
-        console.log(this.audioForm.value);
-      });
-    } else {
-      alert('Veuillez completer le formulaire');
-    }*/
   }
 }
