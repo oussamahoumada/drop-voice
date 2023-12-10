@@ -8,7 +8,6 @@ from models.models import drop, precise_adress
 from services.cloud_storage import add_to_dropbox, get_image_url
 from models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
 from models.models import User
-from services.token_service import TokenService
 
 drop_ns = Namespace("drop/")
 
