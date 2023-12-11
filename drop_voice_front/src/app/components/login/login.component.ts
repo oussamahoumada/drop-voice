@@ -40,7 +40,8 @@ export class LoginComponent {
             Swal.fire('warning', 'mail/passWord incorrect', 'warning');
           }
         },
-        error: () => {
+        error: (error: any) => {
+          alert(JSON.stringify(error));
           Swal.fire('error', 'Somethng wints wrong', 'error');
         }
       });

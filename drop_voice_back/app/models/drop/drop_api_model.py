@@ -50,6 +50,7 @@ get_all_drop_model = api.model("get_all_drops",{
     'ref_theme':fields.String,
     '_precise_adress':fields.List(fields.Nested(precise_adress_model)),
 })
+
 drop_delete_model = api.model("drop_delete",{
     'drop_id': fields.Integer
 })

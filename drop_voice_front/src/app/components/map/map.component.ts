@@ -6,8 +6,8 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { environment } from '../../../environments/environment';
 import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
+import { DropData } from 'src/app/interfaces/drop/drop-interface';
 
-import { DropData } from 'src/app/types/my-types';
 
 @Component({
   selector: 'app-map',

@@ -7,6 +7,7 @@ from extensions import db
 from models.models import drop, precise_adress
 from services.cloud_storage import add_to_dropbox, get_image_url
 from models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
+from models.models import User
 
 drop_ns = Namespace("drop/")
 
@@ -72,6 +73,14 @@ class DropAPI(Resource):
     def get(self):
 
         return drop.query.all()
+
+@drop_ns.route("/user/<int:user_id>")
+class DropAPI(Resource):
+    @drop_ns.marshal_list_with(get_all_drop_model)
+    def get(self, user_id) -> drop:
+        user: User = User.query.get(user_id)
+
+        return drop.query.filter_by(_user=user).all()
 
 def upload(file, name):
     _, encoded_data = file.split(',', 1)

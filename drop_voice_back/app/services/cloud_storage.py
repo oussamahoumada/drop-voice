@@ -1,6 +1,7 @@
 import os
 import dropbox
 from dotenv import load_dotenv
+from dropbox.exceptions import AuthError
 
 ####################
 ## add to dropbox ##
@@ -24,13 +25,13 @@ def add_to_dropbox(path, name):
     print(file_to)
     print(path)
     access_token = os.getenv('DROPBOX_ACCESS_TOKEN')
+    print(access_token)
     upload_file(access_token, path, file_to)
 
 
 ######################
 ## get from dropbox ##
 ######################
-from dropbox.exceptions import AuthError
 
 def get_image_url(file_path):
     try:
