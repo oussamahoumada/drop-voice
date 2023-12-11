@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
+import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
@@ -8,13 +8,13 @@ import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
 import { DropData } from 'src/app/interfaces/drop/drop-interface';
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements AfterViewInit, OnInit {
+  [x: string]: any;
   map: any;
   dropsData: DropData[] = [];
 
@@ -27,7 +27,7 @@ export class MapComponent implements AfterViewInit, OnInit {
   that = this;
 
   ngOnInit(): void {
-    this.dropsData = this.dropDataService.getData();
+    // this.dropsData = this.dropDataService.getData();
   }
 
   public ngAfterViewInit(): void {
@@ -36,18 +36,19 @@ export class MapComponent implements AfterViewInit, OnInit {
       latitude: 48.94492,
       longitude: 2.36424,
     };
-    this.initialiseView(univP8, 13);
-    this.initialiseMarkers();
+    // this.getUserRecords();
+    // this.initialiseView(univP8, 13);
+    this.getCurrentPosition();
+    // this.initialiseMarkers();
   }
 
   handleMarkerClick(dropData: DropData) {
     this.dialog.open(MyCardComponent, { data: dropData });
   }
 
-  private initialiseView(pos: any, zoom: number) {
-    this.map.flyTo([pos.latitude, pos.longitude], zoom);
-    this.map;
-  }
+  // private initialiseView(pos: any, zoom: number) {
+  //   this.map.flyTo([pos.latitude, pos.longitude], zoom);
+  // }
 
   private initialiseMarkers() {
     const icon = L.icon({
@@ -56,6 +57,7 @@ export class MapComponent implements AfterViewInit, OnInit {
       popupAnchor: [13, 0],
     });
     const that = this;
+    console.log('je suis la ', this.dropsData);
     this.dropsData.forEach((element) => {
       const marker = L.marker([element.latitude, element.longitude], {
         icon,
@@ -63,6 +65,54 @@ export class MapComponent implements AfterViewInit, OnInit {
         that.handleMarkerClick(element);
       });
       marker.addTo(this.map);
+    });
+  }
+
+  private getCurrentPosition(): any {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: any) => {
+        const icon = L.icon({
+          iconUrl: '../../../assets/images/man.png',
+          shadowUrl: '../../../assets/images/marker-shadow.png',
+          popupAnchor: [13, 0],
+        });
+        console.log(' current latitude ', position.coords.latitude);
+        console.log(' current longitude ', position.coords.longitude);
+        this.map.flyTo(
+          [position.coords.latitude, position.coords.longitude],
+          13
+        );
+        const marker = L.marker(
+          [position.coords.latitude, position.coords.longitude],
+          {
+            icon,
+          }
+        ).bindPopup('Angular Leaflet');
+        this.map;
+        marker.addTo(this.map);
+      });
+    }
+  }
+
+  private getUserRecords() {
+    this.dropDataService.getDropsByUser().subscribe({
+      next: (data: any[]) => {
+        this.dropsData = data.map((droppp) => {
+          return {
+            drop_id: droppp.drop_id,
+            image_url: droppp.image_url,
+            ref_theme: droppp.ref_theme,
+            audio_url: droppp.audio_url,
+            title: droppp.title,
+            longitude: droppp._precise_adress[0].longitude,
+            latitude: droppp._precise_adress[0].latitude,
+          };
+        });
+        this.initialiseMarkers();
+      },
+      error: () => {
+        alert('Une erreur est survenu');
+      },
     });
   }
 
@@ -81,37 +131,5 @@ export class MapComponent implements AfterViewInit, OnInit {
         accessToken: environment.mapbox.accessToken,
       }
     ).addTo(this.map);
-
-    // Get the current position automatically when the map is displayed
-    // this.getCurrentPosition().subscribe((position: any) => {
-    //   this.map.flyTo([position.latitude, position.longitude], 13);
-
-    //   const icon = L.icon({
-    //     iconUrl: '../../../assets/images/marker-icon.png',
-    //     shadowUrl: '../../../assets/images/marker-shadow.png',
-    //     popupAnchor: [13, 0],
-    //   });
-
-    //   const marker = L.marker([position.latitude, position.longitude], {
-    //     icon,
-    //   }).bindPopup('Angular Leaflet');
-    //   marker.addTo(this.map);
-    // });
-  }
-
-  private getCurrentPosition(): any {
-    return new Observable((observer: Subscriber<any>) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position: any) => {
-          observer.next({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-          observer.complete();
-        });
-      } else {
-        observer.error();
-      }
-    });
   }
 }

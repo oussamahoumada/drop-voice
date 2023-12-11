@@ -7,7 +7,6 @@ import { UrlGeneratorService } from './url-generator.service';
 import { corsHeaders } from 'src/app/cors_validation/corsValidation';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -30,7 +29,8 @@ export class DropDataService {
       image_url: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       title: 'title1',
       ref_theme: 'theme1',
-      audio_url: 'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav',
+      audio_url:
+        'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav',
       longitude: 2.365053,
       latitude: 48.944116,
     },
@@ -70,21 +70,20 @@ export class DropDataService {
     return this.data;
   }
 
+  public getDropsByUser(): Observable<any> {
+    const idUser: string = this.cookieService.get('id');
+    const url: string = this.urlService.getUrlById('/drop/user/', idUser);
+    const response = this.http.get(url, { headers: corsHeaders });
 
-  public getDropsByUser(): Observable<any>
-  {
-    const idUser: string = this.cookieService.get('id')
-    const url: string = this.urlService.getUrlById('/drop/user/', idUser)
-
-    const response = this.http.get(url, { headers: corsHeaders })
-
-    return response
+    return response;
   }
 
-  public removeDrop(drop: DropData): Observable<any>
-  {
-    const url: string = this.urlService.getUrlById('/drop/delete_drop/', drop.drop_id)
+  public removeDrop(drop: DropData): Observable<any> {
+    const url: string = this.urlService.getUrlById(
+      '/drop/delete_drop/',
+      drop.drop_id
+    );
 
-    return this.http.delete(url, { headers: corsHeaders })
+    return this.http.delete(url, { headers: corsHeaders });
   }
 }

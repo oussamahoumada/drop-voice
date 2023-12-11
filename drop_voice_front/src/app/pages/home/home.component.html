@@ -1,5 +1,5 @@
 <!-- Nav bar -->
-<mat-grid-list class="nav" cols="2" gutterSize="0px" rowHeight="10vh">
+<mat-grid-list class="nav" cols="3" gutterSize="0px" rowHeight="10vh">
   <mat-grid-tile>
     <div
       style="
@@ -12,6 +12,9 @@
     >
       GeoVoice
     </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <a href="https://172.20.10.4:5000" style="color: #092635"> Back </a>
   </mat-grid-tile>
   <mat-grid-tile
     ><app-nav-bar style="position: absolute; right: 20px"></app-nav-bar
@@ -30,7 +33,6 @@
   <app-stepper *ngIf="isStepperVisible"></app-stepper>
 </div>
 
-
 <!-- Listen + Record  -->
 <mat-grid-list class="features" cols="2" rowHeight="10vh">
   <mat-grid-tile>
@@ -41,7 +43,12 @@
     </button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button mat-mini-fab color="basic" (click)="toggleStepperComponent()" [disabled]="!isLogged">
+    <button
+      mat-mini-fab
+      color="basic"
+      (click)="toggleStepperComponent()"
+      [disabled]="!isLogged"
+    >
       <mat-icon style="margin: 0; padding: 0; scale: 2; color: #c76b36">
         mic
       </mat-icon>
