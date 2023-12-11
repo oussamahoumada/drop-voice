@@ -14,7 +14,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <img mat-card-image [src]="drop.image_url" alt="Photo" />
-                    <h4>Le thème : {{ drop.theme }}</h4>
+                    <h4>Le thème : {{ drop.ref_theme }}</h4>
                     <app-lecteur-audio [audioUrl]="drop.audio_url"></app-lecteur-audio>
                     <button mat-mini-fab color="warn" aria-label="Supprimer l'enregistrement" (click)="openConfirmationDialog(drop)">
                         <mat-icon>delete</mat-icon>

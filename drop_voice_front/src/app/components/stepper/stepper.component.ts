@@ -67,12 +67,13 @@ export class StepperComponent implements OnInit {
 
   public onImageSelected(event: any): void {
     const file = (event.target as HTMLInputElement).files?.[0];
-    var reader = new FileReader();
+    let reader = new FileReader();
 
     this.selectedImageName = file ? file.name : undefined;
     reader.readAsDataURL(event.target.files[0]);
 
-    this.audioForm.patchValue({ image_url: event.target.files[0].name });
+    const id: string = 'id' + Math.random().toString(16).slice(2);
+    this.audioForm.patchValue({ image_url: id + event.target.files[0].name });
 
     reader.onload = (event: any) => {
       this.image = event.target.result;
@@ -90,7 +91,7 @@ export class StepperComponent implements OnInit {
           window.URL.createObjectURL(output)
         );
 
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.readAsDataURL(output);
 
         reader.onload = (event: any) => {
