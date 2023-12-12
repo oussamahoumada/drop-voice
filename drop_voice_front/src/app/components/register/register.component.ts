@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UrlGeneratorService } from 'src/app/services/url-generator.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-register',
@@ -10,10 +12,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  public urlFront: string = '';
+  constructor(private authService: AuthService, private router: Router) {
+    this.urlFront = environment.apiUrl;
+  }
 
   public registrationForm: FormGroup = new FormGroup({
     password: new FormControl(null, [Validators.required]),
@@ -26,16 +28,16 @@ export class RegisterComponent {
     if (this.registrationForm.valid) {
       this.authService.registration(this.registrationForm.value).subscribe({
         next: (res: any) => {
-            if (res) {
-              Swal.fire('Success', 'Registration Success', 'success');
-              this.router.navigateByUrl('/login');
-            } else {
-              Swal.fire('warning', 'Somethng wints wrong', 'warning');
-            }
-          },
-        error: () => {
-            Swal.fire('error', 'Somethng wints wrong', 'error');
+          if (res) {
+            Swal.fire('Success', 'Registration Success', 'success');
+            this.router.navigateByUrl('/login');
+          } else {
+            Swal.fire('warning', 'Somethng wints wrong', 'warning');
           }
+        },
+        error: () => {
+          Swal.fire('error', 'Somethng wints wrong', 'error');
+        },
       });
     } else {
       Swal.fire('warning', 'all fields are required', 'warning');
