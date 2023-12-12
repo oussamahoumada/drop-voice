@@ -10,8 +10,6 @@ dbx = dropbox.Dropbox( app_key = os.getenv('APP_KEY_DROPBOX'), app_secret = os.g
 
 def upload_file(access_token, file_from,file_to):
     
-    #dbx = dropbox.Dropbox(access_token)
-
     if(file_from!='' and file_to!=''):
         with open(file_from, "rb") as f:
             dbx.files_upload(f.read(), file_to, mute = True)
@@ -36,7 +34,6 @@ def add_to_dropbox(path, name):
 
 def get_image_url(file_path):
     try:
-        #dbx = dropbox.Dropbox(os.getenv('DROPBOX_ACCESS_TOKEN'))
         shared_link = dbx.sharing_create_shared_link("/test/"+file_path)
         raw_url = shared_link.url.replace('dl=0', 'raw=1')
         return raw_url
