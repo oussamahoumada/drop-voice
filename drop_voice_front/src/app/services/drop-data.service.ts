@@ -7,7 +7,6 @@ import { UrlGeneratorService } from './url-generator.service';
 import { corsHeaders } from 'src/app/cors_validation/corsValidation';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -24,67 +23,26 @@ export class DropDataService {
     return this.http.post(url, body, { headers: corsHeaders });
   }
 
-  private data: DropData[] = [
-    {
-      drop_id: 1,
-      image_url: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      title: 'title1',
-      ref_theme: 'theme1',
-      audio_url: 'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav',
-      longitude: 2.365053,
-      latitude: 48.944116,
-    },
-    {
-      drop_id: 2,
-      image_url:
-        'https://images.caradisiac.com/images/2/1/0/6/172106/S0-mercedes-amg-classe-a-35-un-prix-de-50-400-eur-569831.jpg',
-      title: 'title2',
-      ref_theme: 'theme2',
-      audio_url: 'https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav',
-      longitude: 2.3887546598612985,
-      latitude: 48.9447318200729,
-    },
-    {
-      drop_id: 3,
-      image_url:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Tour_eiffel_-_vue_du_trocad%C3%A9ro.jpg/1200px-Tour_eiffel_-_vue_du_trocad%C3%A9ro.jpg',
-      title: 'title3',
-      ref_theme: 'theme3',
-      audio_url: 'https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav',
-      longitude: 2.3486125422928428,
-      latitude: 48.966039011719836,
-    },
-    {
-      drop_id: 4,
-      image_url:
-        'https://fr.schreder.com/sites/default/files/2020-03/accent-architectural-maqam-echahid-algiers-algeria-sculpdot-78a8868.jpg',
-      title: 'title4',
-      ref_theme: 'theme4',
-      audio_url: 'https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav',
-      longitude: 2.378178053132829,
-      latitude: 48.94293899774667,
-    },
-  ];
+  public getDropsByUser(): Observable<any> {
+    const idUser: string = this.cookieService.get('id');
+    const url: string = this.urlService.getUrlById('/drop/user/', idUser);
+    const response = this.http.get(url, { headers: corsHeaders });
 
-  getData(): DropData[] {
-    return this.data;
+    return response;
   }
 
-
-  public getDropsByUser(): Observable<any>
-  {
-    const idUser: string = this.cookieService.get('id')
-    const url: string = this.urlService.getUrlById('/drop/user/', idUser)
-
-    const response = this.http.get(url, { headers: corsHeaders })
-
-    return response
+  public getAllDrops(): Observable<any> {
+    const url: string = this.urlService.getUrl('/drop/get_all_drops');
+    const response = this.http.get(url, { headers: corsHeaders });
+    return response;
   }
 
-  public removeDrop(drop: DropData): Observable<any>
-  {
-    const url: string = this.urlService.getUrlById('/drop/delete_drop/', drop.drop_id)
+  public removeDrop(drop: DropData): Observable<any> {
+    const url: string = this.urlService.getUrlById(
+      '/drop/delete_drop/',
+      drop.drop_id
+    );
 
-    return this.http.delete(url, { headers: corsHeaders })
+    return this.http.delete(url, { headers: corsHeaders });
   }
 }

@@ -1,9 +1,26 @@
-<mat-grid-list class="nav" cols="1" rowHeight="10vh">
+<!-- Nav bar -->
+<mat-grid-list class="nav" cols="3" gutterSize="0px" rowHeight="10vh">
   <mat-grid-tile>
-      <app-nav-bar>
-      </app-nav-bar>
+    <div
+      style="
+        position: absolute;
+        color: #c76b36;
+        font-size: 25px;
+        font-weight: bold;
+      "
+    >
+      GeoVoice
+    </div>
   </mat-grid-tile>
+  <mat-grid-tile>
+    <a href="https://172.20.10.4:5000" style="color: rgb(53, 46, 46)"> Back </a>
+  </mat-grid-tile>
+  <mat-grid-tile
+    ><app-nav-bar style="position: absolute; left: 20px"></app-nav-bar
+  ></mat-grid-tile>
 </mat-grid-list>
+
+<!-- Form -->
 <div class="background">
   <mat-card class="transparent-div">
     <mat-card-title>Créer un compte</mat-card-title>
@@ -53,11 +70,17 @@
             <mat-icon matSuffix>vpn_key</mat-icon>
           </mat-form-field>
         </p>
-        <div class="button"> 
-          <button (click)="register()" style="background-color: rgb(171, 171, 171)" mat-button>
+        <div class="button">
+          <button
+            (click)="register()"
+            style="background-color: rgb(171, 171, 171)"
+            mat-button
+          >
             Créer un compte
           </button>
-          <button class="btn-login" [routerLink]="['/login']" mat-raised-button>J'ai déjà un compte</button>
+          <button class="btn-login" [routerLink]="['/login']" mat-raised-button>
+            J'ai déjà un compte
+          </button>
         </div>
       </form>
     </mat-card-content>

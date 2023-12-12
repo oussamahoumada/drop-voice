@@ -48,6 +48,7 @@ get_all_drop_model = api.model("get_all_drops",{
     'audio_url' : fields.String,
     'date' : fields.Date,
     'ref_theme':fields.String,
+    'ref_user':fields.Integer,
     '_precise_adress':fields.List(fields.Nested(precise_adress_model)),
 })
 
