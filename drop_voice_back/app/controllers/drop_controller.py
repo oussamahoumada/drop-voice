@@ -71,7 +71,6 @@ class DropAPI(Resource):
 class DropAPI(Resource):
     @drop_ns.marshal_list_with(get_all_drop_model)
     def get(self):
-
         return drop.query.all()
 
 @drop_ns.route("/user/<int:user_id>")

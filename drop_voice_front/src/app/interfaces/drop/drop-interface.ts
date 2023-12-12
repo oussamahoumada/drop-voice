@@ -6,4 +6,5 @@ export interface DropData {
   audio_url: string;
   longitude: number;
   latitude: number;
+  ref_user: number;
 }

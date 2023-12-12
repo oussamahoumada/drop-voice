@@ -14,7 +14,7 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile>
-    <a href="https://172.20.10.4:5000" style="color: #092635"> Back </a>
+    <a href="https://172.20.10.4:5000" style="color: rgb(53, 46, 46)"> Back </a>
   </mat-grid-tile>
   <mat-grid-tile
     ><app-nav-bar style="position: absolute; right: 20px"></app-nav-bar
@@ -34,10 +34,21 @@
 </div>
 
 <!-- Listen + Record  -->
-<mat-grid-list class="features" cols="2" rowHeight="10vh">
+<mat-grid-list
+  class="features"
+  cols="2"
+  rowHeight="10vh"
+  style="background-color: #c76b36"
+  gutterSize="3px"
+>
   <mat-grid-tile>
-    <button mat-mini-fab color="basic" (click)="toggleStepperComponent()">
-      <mat-icon style="margin-top: 5px; padding: 0; scale: 2; color: #c76b36"
+    <button
+      mat-mini-fab
+      [ngStyle]="{ transform: 'scale(1.25)' }"
+      color="basic"
+      (click)="toggleStepperComponent()"
+    >
+      <mat-icon style="margin: 0px; padding: 10; scale: 1; color: #c76b36"
         >headset</mat-icon
       >
     </button>
@@ -45,11 +56,12 @@
   <mat-grid-tile>
     <button
       mat-mini-fab
+      [ngStyle]="{ transform: 'scale(1.25)' }"
       color="basic"
       (click)="toggleStepperComponent()"
       [disabled]="!isLogged"
     >
-      <mat-icon style="margin: 0; padding: 0; scale: 2; color: #c76b36">
+      <mat-icon style="margin: 0; padding: 0; scale: 1; color: #c76b36">
         mic
       </mat-icon>
     </button>

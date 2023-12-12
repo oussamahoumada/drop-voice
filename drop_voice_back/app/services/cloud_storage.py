@@ -6,10 +6,11 @@ from dropbox.exceptions import AuthError
 ####################
 ## add to dropbox ##
 ####################
+dbx = dropbox.Dropbox( app_key = os.getenv('APP_KEY_DROPBOX'), app_secret = os.getenv('APP_SECRET_DROPBOX'), oauth2_refresh_token=os.getenv('REFRESH_TOKEN_DROPBOX'))
 
 def upload_file(access_token, file_from,file_to):
     
-    dbx = dropbox.Dropbox(access_token)
+    #dbx = dropbox.Dropbox(access_token)
 
     if(file_from!='' and file_to!=''):
         with open(file_from, "rb") as f:
@@ -35,31 +36,10 @@ def add_to_dropbox(path, name):
 
 def get_image_url(file_path):
     try:
-        dbx = dropbox.Dropbox(os.getenv('DROPBOX_ACCESS_TOKEN'))
+        #dbx = dropbox.Dropbox(os.getenv('DROPBOX_ACCESS_TOKEN'))
         shared_link = dbx.sharing_create_shared_link("/test/"+file_path)
         raw_url = shared_link.url.replace('dl=0', 'raw=1')
         return raw_url
 
     except AuthError as e:
         print("Authentication error:", e)
-
-
-'''def download_file(access_token, file_from, file_to):
-    dbx = dropbox.Dropbox(access_token)
-
-    if file_from != '' and file_to != '':
-        try:
-            with open(file_to, "wb") as f:
-                metadata, res = dbx.files_download(file_from)
-                f.write(res.content)
-            print("Downloaded")
-        except dropbox.exceptions.HttpError as err:
-            print(f"Error downloading file: {err}")
-    else:
-        print("Empty variable error")
-
-def get_from_dropbox(name, destination_path):
-    load_dotenv()
-    file_from = '/test/' + name
-    access_token = os.getenv('DROPBOX_ACCESS_TOKEN')
-    download_file(access_token, file_from, destination_path)'''

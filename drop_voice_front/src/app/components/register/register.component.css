@@ -3,29 +3,10 @@
   text-align: -webkit-center;
 }
 
-mat-card-content,
-form {
-  padding: 5%;
+.nav mat-grid-tile {
+  background-color: rgb(53, 46, 46);
 }
 
-mat-card,
-div {
-  height: 100%;
-}
-
-p {
-  height: 25%;
-}
-mat-card-title {
-  height: 20%;
-  padding: 70px 0;
-  align-items: center;
-  text-align: center;
-}
-mat-card-content {
-  height: 80%;
-}
-mat-card,
 mat-card-content,
 form {
   padding: 5%;
@@ -41,6 +22,7 @@ form {
   background-attachment: fixed;
   /* Add some padding for better visual appearance (optional) */
   padding: 20px;
+  height: 90%;
 }
 
 .transparent-div {
