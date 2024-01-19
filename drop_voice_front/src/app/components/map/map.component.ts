@@ -2,23 +2,27 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-
 import { environment } from '../../../environments/environment';
 import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
 import { DropData } from 'src/app/interfaces/drop/drop-interface';
 import { CookieService } from 'ngx-cookie-service';
 
+
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
+
 export class MapComponent implements AfterViewInit, OnInit {
   [x: string]: any;
   map: any;
   dropsData: DropData[] = [];
   currentPositionMarker: any;
+  private dropStarted: number[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -73,10 +77,10 @@ export class MapComponent implements AfterViewInit, OnInit {
       setInterval(function () {
         that.displayCurrentPosition();
       }, 5000);
-    });
+    });  
   }
 
-  private displayCurrentPosition(): any {
+  private async displayCurrentPosition(): Promise<any> {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: any) => {
@@ -86,7 +90,7 @@ export class MapComponent implements AfterViewInit, OnInit {
           const icon = L.icon({
             iconUrl: '../../../assets/images/man.png',
             shadowUrl: '../../../assets/images/marker-shadow.png',
-          });
+          });          
           if (this.currentPositionMarker) {
             this.currentPositionMarker.remove();
           } else {
@@ -104,11 +108,19 @@ export class MapComponent implements AfterViewInit, OnInit {
             ' latitude : ',
             latitude
           );
+          const userPosition = L.latLng(latitude, longitude);
+          let isAudioPlaying = false;
+
+          this.dropsData.forEach(async(element: DropData) => {
+            const dropPosition = L.latLng(element.latitude, element.longitude);
+            const distance = userPosition.distanceTo(dropPosition);
+            this.startAudioAtLocalisation(isAudioPlaying, distance, element)
+            });
         },
         (err) => console.log(err),
         {
           enableHighAccuracy: true,
-          timeout: 5000,
+          timeout: 1000,
           maximumAge: 0,
         }
       );
@@ -148,12 +160,65 @@ export class MapComponent implements AfterViewInit, OnInit {
       {
         attribution:
           'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
+        maxZoom: 100,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
         accessToken: environment.mapbox.accessToken,
       }
     ).addTo(this.map);
+    /*
+    const drawnItems = new L.FeatureGroup();
+    this.map.addLayer(drawnItems);
+  
+    // Add the Leaflet Draw control
+    const drawControl = new L.Control.Draw({
+      edit: {
+        featureGroup: drawnItems,
+      },
+    });
+    this.map.addControl(drawControl);
+  
+    const that = this;
+    setInterval(function () {
+      that.displayCurrentPosition();
+    }, 5000); 
+*/
+  }
+
+  
+  private async startAudioAtLocalisation(isAudioPlaying: boolean, distance: number, element: DropData): Promise<void> {
+    const isAlreadyStarted = this.dropStarted.includes(element.drop_id);
+  
+    if (!isAudioPlaying && distance < 5
+      
+      
+      
+      
+  ) {
+      // Check if the drop hasn't started yet
+      if (!isAlreadyStarted) {
+        isAudioPlaying = true;
+        const audio = new Audio(element.audio_url);
+  
+        // Mark the drop as started
+        this.dropStarted.push(element.drop_id);
+  
+        // Event listener to set isAudioPlaying to false when audio ends
+        audio.addEventListener('ended', () => {
+          isAudioPlaying = false;
+        });
+  
+        // Play the audio and handle errors
+        try {
+          await audio.play();
+        } catch (error) {
+          console.error('Audio playback error:', error);
+        }
+      } else {
+        // If the drop has already started, update isAudioPlaying to false
+        isAudioPlaying = false;
+      }
+    }
   }
 }
