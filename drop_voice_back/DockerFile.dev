@@ -1,0 +1,27 @@
+FROM python:3.11.5
+
+WORKDIR /app
+
+COPY requirements.txt /app/requirements.txt
+COPY certificats /app/certificats/
+COPY . /app/
+
+RUN python3 -m pip install --upgrade pip virtualenv \
+    && python3 -m venv .venv \
+    && . .venv/bin/activate \
+    && pip install --upgrade pip
+
+RUN pip install -r requirements.txt \
+    && pip cache purge
+
+RUN . .venv/bin/activate && openssl req -x509 -newkey rsa:4096 -nodes -out /app/certificats/cert.pem -keyout /app/certificats/key.pem -days 365 \
+    -subj "/C=FR/ST=State/L=Paris/O=geovoice/CN=localhost"
+
+ENV FLASK_APP=app
+ENV FLASK_DEBUG=1
+ENV FLASK_RUN_HOST=0.0.0.0
+
+
+EXPOSE 5000
+
+CMD ["python", "./app/__init__.py"]

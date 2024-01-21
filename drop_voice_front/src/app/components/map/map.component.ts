@@ -46,7 +46,6 @@ export class MapComponent implements AfterViewInit, OnInit {
 
   private initialiseMarkers() {
     const that = this;
-    console.log('je suis la ', this.dropsData);
     this.dropsData.forEach((element) => {
       const userIcon = L.icon({
         iconUrl: '../../../assets/images/my-marker.png',
@@ -82,7 +81,6 @@ export class MapComponent implements AfterViewInit, OnInit {
         (position: any) => {
           const longitude = position.coords.longitude;
           const latitude = position.coords.latitude;
-          console.log(position);
           const icon = L.icon({
             iconUrl: '../../../assets/images/man.png',
             shadowUrl: '../../../assets/images/marker-shadow.png',

@@ -102,7 +102,6 @@ export class StepperComponent implements OnInit {
         }
 
         this.audioForm.patchValue({ audioCtrl: output });
-        console.log(output)
       }
     }).catch(errorCase => {
       console.error(errorCase)
@@ -114,7 +113,6 @@ export class StepperComponent implements OnInit {
       this.mapService.getCurrentPosition().subscribe((map) => {
         this.audioForm.patchValue({ latitude: map.latitude });
         this.audioForm.patchValue({ longitude: map.longitude });
-        console.log(this.audioForm.value);
         this.dropService
           .postDrop(this.audioForm.value)
           .subscribe({
