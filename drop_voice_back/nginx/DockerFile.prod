@@ -1,0 +1,41 @@
+FROM python:3.11.5
+
+WORKDIR /app
+
+COPY requirements.txt /app/requirements.txt
+COPY . /app/
+
+RUN python3 -m pip install --upgrade pip virtualenv \
+    && python3 -m venv .venv \
+    && . .venv/bin/activate \
+    && pip install --upgrade pip
+
+RUN pip install -r requirements.txt \
+    && pip cache purge
+
+RUN set -e; \
+	apk add --no-cache --virtual .build-deps \
+		gcc \
+		libc-dev \
+		linux-headers \
+	; \
+	pip3 --no-cache-dir install -r requirements.txt; \
+	apk del .build-deps;
+
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+ENV FLASK_APP=app
+ENV FLASK_DEBUG=0
+
+# (Éventuellement) Copiez les certificats SSL dans le conteneur
+# COPY certificats /etc/nginx/certificats/
+
+# (Éventuellement) Installez Nginx si nécessaire
+# RUN apt-get update && \
+#     apt-get install -y nginx
+
+# CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+
+EXPOSE 5000
+
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "--chdir", "/app", "app:app"]

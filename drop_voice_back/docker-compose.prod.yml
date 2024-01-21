@@ -34,9 +34,7 @@ services:
   nginx:
     container_name: nginx-geo-voice
     image: nginx:latest
-    build:
-      context: .
-      dockerfile: './DockerFile.prod'
+    build: ./nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     #     - ./certificats:/etc/nginx/certificats:ro

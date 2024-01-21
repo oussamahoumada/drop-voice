@@ -31,6 +31,7 @@
   MYSQL_DATABASE=<NAME_DATABASE>
 
   ### Firebase
+  API_KEY=<VOTRE_API_KEY>
   AUTH_DOMAIN="<VOTRE_AUTH_DOMAIN>"
   DATABASE_URL="<VOTRE_DATABASE_URL>"
   PROJECT_ID="<VOTRE_PROJECT_ID>"
@@ -156,6 +157,7 @@ Pour le lancer le serveur back revoir la partie Docker
   MYSQL_DATABASE=<NAME_DATABASE>
 
   ### Firebase
+  API_KEY=<VOTRE_API_KEY>
   AUTH_DOMAIN="<VOTRE_AUTH_DOMAIN>"
   DATABASE_URL="<VOTRE_DATABASE_URL>"
   PROJECT_ID="<VOTRE_PROJECT_ID>"
@@ -176,5 +178,5 @@ Pour le lancer le serveur back revoir la partie Docker
   ### Build de l'image Docker
   Pour build votre image vous pouvez utiliser cette commande depuis un terminal, il faut être sur le chemin suivant: 'drop_voice_back/'
   ```bash
-  docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+  docker-compose -f docker-compose.prod.yml up -d --build
   ```
