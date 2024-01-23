@@ -1,8 +1,8 @@
 from flask_restx import Resource, Namespace
 
-from extensions import db
-from models.models import precise_adress
-from models.location.precise_adress_api_model import precise_adress_model, precise_adress_input_model
+from ..extensions import db
+from ..models.models import precise_adress
+from ..models.location.precise_adress_api_model import precise_adress_model, precise_adress_input_model
 
 loactionNs = Namespace("location/")
 

@@ -1,4 +1,4 @@
-from extensions import api
+from ...extensions import api
 from flask_restx import fields
 
 precise_adress_model =  api.model("precise_adress",{

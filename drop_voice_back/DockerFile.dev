@@ -24,6 +24,6 @@ ENV FLASK_RUN_HOST=0.0.0.0
 
 EXPOSE 5000
 
-CMD ["python", "./app/__init__.py"]
-# CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--cert", "/app/certificats/cert.pem", "--key", "/app/certificats/key.pem"]
-
+# CMD ["python", "./app/__init__.py"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--cert", "/app/certificats/cert.pem", "--key", "/app/certificats/key.pem"]
+# CMD ["tail", "-f", "/dev/null"]
