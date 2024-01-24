@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: './nginx/DockerFile.prod'
     expose:
-      - "5000"
+      - "8080"
     volumes:
       - './:/app'
     links:
