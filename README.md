@@ -178,5 +178,5 @@ Pour le lancer le serveur back revoir la partie Docker
   ### Build de l'image Docker
   Pour build votre image vous pouvez utiliser cette commande depuis un terminal, il faut être sur le chemin suivant: 'drop_voice_back/'
   ```bash
-  docker-compose -f docker-compose.prod.yml up -d --build
+  docker-compose -f docker-compose.prod.yml up --build
   ```
