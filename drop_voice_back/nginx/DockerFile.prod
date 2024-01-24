@@ -13,14 +13,6 @@ RUN python3 -m pip install --upgrade pip virtualenv \
 RUN pip install -r requirements.txt \
     && pip cache purge
 
-RUN set -e; \
-	apk add --no-cache --virtual .build-deps \
-		gcc \
-		libc-dev \
-		linux-headers \
-	; \
-	pip3 --no-cache-dir install -r requirements.txt; \
-	apk del .build-deps;
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 

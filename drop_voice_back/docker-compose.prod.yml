@@ -8,7 +8,7 @@ services:
     container_name: python-geo-voice
     build:
       context: .
-      dockerfile: './DockerFile.prod'
+      dockerfile: './nginx/DockerFile.prod'
     expose:
       - "5000"
     volumes:
@@ -27,14 +27,14 @@ services:
     ports:
       - "9906:3306"
     env_file:
-      - ./app/.env
+      - ./.env
     networks:
       - python
 
   nginx:
     container_name: nginx-geo-voice
     image: nginx:latest
-    build: ./nginx
+    #build: ./nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     #     - ./certificats:/etc/nginx/certificats:ro
