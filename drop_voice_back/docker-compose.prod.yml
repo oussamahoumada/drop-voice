@@ -8,7 +8,7 @@ services:
     container_name: python-geo-voice
     build:
       context: .
-      dockerfile: './nginx/DockerFile.prod'
+      dockerfile: './DockerFile.prod'
     expose:
       - "8080"
     volumes:
@@ -33,6 +33,7 @@ services:
 
   nginx:
     container_name: nginx-geo-voice
+    build: ./nginx
     image: nginx:latest
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
