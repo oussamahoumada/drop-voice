@@ -40,4 +40,4 @@ if os.getenv('ENV') == 'development' and (is_exist_cert and is_exist_key):
 
     app.run(debug=True, host='0.0.0.0', ssl_context=context)
 else :
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=os.getenv('PORT_PROD'))
