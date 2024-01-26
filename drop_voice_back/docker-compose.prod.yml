@@ -10,8 +10,8 @@ services:
     build:
       context: .
       dockerfile: './DockerFile.prod'
-    expose:
-      - "5000:5000"
+    ports: 
+     - "5000:5000"
     volumes:
       - './:/app'
     links:
