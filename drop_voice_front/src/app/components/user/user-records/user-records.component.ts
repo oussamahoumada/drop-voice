@@ -51,7 +51,7 @@ export class UserRecordsComponent implements OnInit {
       data: { message: 'Voulez-vous vraiment effectuer cette action ?' },
     });
   
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
         this.dropService.removeDrop(drop).subscribe({
           next: (response: any) => {

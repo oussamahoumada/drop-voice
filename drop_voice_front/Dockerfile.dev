@@ -1,0 +1,17 @@
+FROM node:18.13
+
+WORKDIR /app
+
+RUN npm install --force -g @angular/cli@latest
+
+COPY package.json ./
+
+RUN npm install --force
+
+COPY . .
+
+EXPOSE 4200
+
+CMD ["npm", "start"]
+# CMD ["ng", "serve", "--host", "0.0.0.0", "--poll=2000", "--ssl"]
+

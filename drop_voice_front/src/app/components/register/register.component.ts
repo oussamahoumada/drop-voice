@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UrlGeneratorService } from 'src/app/services/url-generator.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -32,11 +31,11 @@ export class RegisterComponent {
             Swal.fire('Success', 'Registration Success', 'success');
             this.router.navigateByUrl('/login');
           } else {
-            Swal.fire('warning', 'Somethng wints wrong', 'warning');
+            Swal.fire('warning', 'Something wints wrong', 'warning');
           }
         },
         error: () => {
-          Swal.fire('error', 'Somethng wints wrong', 'error');
+          Swal.fire('error', 'Something wints wrong', 'error');
         },
       });
     } else {
