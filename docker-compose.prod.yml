@@ -13,7 +13,7 @@ services:
         ports: 
             - "5000:5000"
         volumes:
-            - './:/app'
+            - './drop_voice_back/:/app'
         links:
             - database-geo-voice:database-geo-voice
         networks:
@@ -36,27 +36,13 @@ services:
         container_name: angular-geo-voice
         build:
             context: .
-            dockerfile: './drop_voice_front/Dockerfile.dev'
+            dockerfile: './drop_voice_front/Dockerfile.prod'
         ports: 
-            - "4200:4200"
-        volumes:
-            - './:/app'
-            - '/app/node_modules'
-
-
-    nginx:
-        container_name: nginx-geo-voice
-        build: ./nginx
-        image: nginx:latest
-        restart: always
-        ports:
             - "80:80"
             - "443:443"
-        depends_on:
-            - flaskdocker
-            - angular-docker
-        networks:
-            - python
+        volumes:
+            - './drop_voice_front/:/app'
+            - '/app/node_modules'
 
 networks:
     local:
