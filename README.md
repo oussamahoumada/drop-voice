@@ -64,7 +64,7 @@
 
   Une fois la commande exécuté arrêter les différents conteneur et relancer la commande qui se trouve <b>"Start le container"</b>. L'application normalement va être lancé en HTTPS pour la partie Back.
 
-## Commandes Docker
+## Commandes Docker Back
 ```bash
 cd drop_voice_back
 ```
@@ -117,6 +117,16 @@ ifconfig
   N'oubliez pas de mettre à jour également cette adresse IP dans le fichier environment.development.ts, en gardent le même port utilisé précédemment en local.
 </li>
 
+## Commandes Docker Front
+
+```bash
+cd drop_voice_front
+```
+
+```bash
+docker-compose up --build
+```
+Cela va vous permettre de lancer le container de Angular et la lancer en https pas besoin de lancer la commande ng serve
 
 ### Start
 ```bash
@@ -173,7 +183,7 @@ Pour le lancer le serveur back revoir la partie Docker
 
   ```
 
-  Faudra modifier la configuration de Nginx. Le fichier se trouve dans 'drop_voice_back/nginx/nginx.conf. Récupérez les clé pour le SSL depuis votre hébergeur.
+  Faudra modifier la configuration de Nginx. Le fichier se trouve dans 'drop_voice_front/nginx/nginx.conf. Récupérez les clé pour le SSL depuis votre hébergeur.
 
   ### Build de l'image Docker
   Pour build votre image vous pouvez utiliser cette commande depuis un terminal, il faut être sur le chemin suivant: 'drop_voice_back/'
