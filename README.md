@@ -186,7 +186,7 @@ Pour le lancer le serveur back revoir la partie Docker
   Faudra modifier la configuration de Nginx. Le fichier se trouve dans 'drop_voice_front/nginx/nginx.conf. Récupérez les clé pour le SSL depuis votre hébergeur.
 
   ### Build de l'image Docker
-  Pour build votre image vous pouvez utiliser cette commande depuis un terminal, il faut être sur le chemin suivant: 'drop_voice_back/'
+  Pour build votre image vous pouvez utiliser cette commande depuis un terminal, il faut être sur le chemin suivant: 'drop_voice/'
   ```bash
   docker-compose -f docker-compose.prod.yml up -d --build
   ```
