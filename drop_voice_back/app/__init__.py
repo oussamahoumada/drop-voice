@@ -30,14 +30,15 @@ CORS(app, supports_credentials=True)
 is_exist_cert = os.path.exists('/app/certificats/cert.pem')
 is_exist_key = os.path.exists('/app/certificats/key.pem')
 
-if os.getenv('ENV') == 'development' and (is_exist_cert and is_exist_key):
-    cert_path = '/app/certificats/cert.pem'
-    key_path = '/app/certificats/key.pem'
-    
-    context = (cert_path, key_path)
+if os.getenv('ENV') == 'development':
+    if is_exist_cert and is_exist_key:
+        cert_path = '/app/certificats/cert.pem'
+        key_path = '/app/certificats/key.pem'
+        
+        context = (cert_path, key_path)
 
-    sslify = SSLify(app, permanent=True)
+        sslify = SSLify(app, permanent=True)
 
-    app.run(debug=True, host='0.0.0.0', ssl_context=context)
-else :
-    app.run(host='0.0.0.0', port=os.getenv('PORT_PROD'))
+        app.run(debug=True, host='0.0.0.0', ssl_context=context)
+    else:
+        app.run(host='0.0.0.0', port=os.getenv('PORT_DEV'))
