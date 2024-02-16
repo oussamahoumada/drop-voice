@@ -44,6 +44,8 @@ services:
             - '/app/node_modules'
         networks:
             - app
+        depends_on:
+            - flaskdocker
 
 networks:
     app:

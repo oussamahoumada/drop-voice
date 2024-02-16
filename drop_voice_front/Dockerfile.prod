@@ -24,3 +24,4 @@ COPY drop_voice_front/nginx/SSL-cert/_.drop-app.fr_private_key.pem /etc/nginx/_.
 COPY drop_voice_front/nginx/SSL-cert/drop-app.fr_ssl_certificate.pem /etc/nginx/drop-app.fr_ssl_certificate.pem
 
 EXPOSE 80
+EXPOSE 443
