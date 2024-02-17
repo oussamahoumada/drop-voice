@@ -42,7 +42,7 @@ export class StepperComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.themeService.getThemes().subscribe((response) => {
+    this.themeService.getThemes().subscribe((response: ThemeInterface[]) => {
       this.themes = response;
     });
   }
@@ -102,19 +102,18 @@ export class StepperComponent implements OnInit {
         }
 
         this.audioForm.patchValue({ audioCtrl: output });
-        console.log(output)
       }
-    }).catch(errorCase => {
+    }).catch((errorCase: any) => {
       console.error(errorCase)
     });
   }
 
   public submitForm(): void {
     if (this.audioForm.valid) {
-      this.mapService.getCurrentPosition().subscribe((map) => {
+      this.mapService.getCurrentPosition().subscribe((map: { latitude: any; longitude: any; }) => {
         this.audioForm.patchValue({ latitude: map.latitude });
         this.audioForm.patchValue({ longitude: map.longitude });
-        console.log(this.audioForm.value);
+
         this.dropService
           .postDrop(this.audioForm.value)
           .subscribe({

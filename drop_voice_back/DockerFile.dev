@@ -1,0 +1,36 @@
+FROM python:3.11.5
+
+WORKDIR /app
+
+COPY requirements.txt /app/requirements.txt
+COPY certificats /app/certificats/
+COPY . /app/
+
+RUN python3 -m pip install --upgrade pip virtualenv \
+    && python3 -m venv .venv \
+    && . .venv/bin/activate \
+    && pip install --upgrade pip
+
+RUN pip install -r requirements.txt \
+    && pip cache purge
+
+RUN apt update \
+    && apt-get install libnss3 -y \
+    && curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64" \
+    && chmod +x mkcert-v*-linux-amd64 \
+    && cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+    # && mkcert -install \
+    # && mkcert -key-file key.pem -cert-file cert.pem localhost 172.20.10.3 192.168.0.114
+    # && mkcert -key-file key.pem -cert-file cert.pem drop-dev.com *.drop-dev.com localhost 172.20.10.3 192.168.0.114 127.0.0.1 ::1
+    # mkcert -CAROOT
+
+ENV FLASK_APP=app
+ENV FLASK_DEBUG=1
+ENV FLASK_RUN_HOST=0.0.0.0
+
+
+EXPOSE 5000
+
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--cert", "/app/certificats/cert.pem", "--key", "/app/certificats/key.pem"]
+# CMD ["python", "./app/__init__.py"]
+# CMD ["tail", "-f", "/dev/null"]

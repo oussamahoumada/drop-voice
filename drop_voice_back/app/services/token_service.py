@@ -1,6 +1,5 @@
-import firebase_admin
 from firebase_admin import auth
-from firebase_config import set_up_firebase
+from ..firebase_config import set_up_firebase
 
 set_up_firebase()
 class TokenService:

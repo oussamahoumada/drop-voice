@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  angular-docker:
+    container_name: angular-geo-voice
+    build:
+      context: .
+      dockerfile: './Dockerfile.dev'
+    ports: 
+      - "4200:4200"
+    volumes:
+      - './:/app'
+      - '/app/node_modules'

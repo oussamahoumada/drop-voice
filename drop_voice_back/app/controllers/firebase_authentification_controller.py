@@ -1,12 +1,11 @@
 import json
 from flask_restx import Resource, Namespace
 
-from extensions import db
-from models.models import User
-from pyrebase_config import set_up_pyrebase
-from services.token_service import TokenService
-from models.auth.auth_api_model import login_model, register_model, logout_model
-
+from ..extensions import db
+from ..models.models import User
+from ..pyrebase_config import set_up_pyrebase
+from ..services.token_service import TokenService
+from ..models.auth.auth_api_model import login_model, register_model, logout_model
 
 auth_ns = Namespace("auth/")
 auth = set_up_pyrebase().auth()

@@ -1,0 +1,55 @@
+version: "3.7"
+
+## Pour lancer le docker-compose.prod
+# Lancer la commade suivante : docker-compose -f docker-compose.prod.yml up --build
+
+services:
+    flaskdocker:
+        container_name: python-geo-voice
+        restart: always
+        build:
+            context: .
+            dockerfile: './drop_voice_back/DockerFile.prod'
+        ports: 
+            - "5000:5000"
+        volumes:
+            - './drop_voice_back/:/app'
+        networks:
+            - app
+
+    database-geo-voice:
+        container_name: database-geo-voice
+        image: mysql:latest
+        volumes:
+            - dbdata:/var/lib/mysql
+        restart: always
+        ports:
+            - "9906:3306"
+        env_file:
+            - ./drop_voice_back/app/.env
+        networks:
+            - app
+
+    angular-docker:
+        container_name: angular-geo-voice
+        restart: always
+        build:
+            context: .
+            dockerfile: './drop_voice_front/Dockerfile.prod'
+        ports: 
+            - "80:80"
+            - "443:443"
+        volumes:
+            - './drop_voice_front/:/app'
+            - '/app/node_modules'
+        networks:
+            - app
+        depends_on:
+            - flaskdocker
+
+networks:
+    app:
+
+volumes:
+    dbdata:
+        driver: local
