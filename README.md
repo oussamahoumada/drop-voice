@@ -53,16 +53,54 @@
 
   Il faut d'abord lancer l'application pour cela vous devez suivre la session <b>"Start le container"</b> et puis faudra rentrez dans le container. Suivre la session <b>"Rentrez dans la machine du docker pour effectuer des commandes</b>".
 
+  Pour faire cela il faut juste commenté cette ligne dans drop_voice_back/DockerFile.dev 
+  
+   #CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--cert", "/app/cert.pem", "--key", "/app/key.pem"]
+
+   et décommettez celle-ci CMD ["tail", "-f", "/dev/null"]
+
+
   Je rappelle que pour rentrer dans le container il faut être au niveau de : 'drop_voice_back'
 
-  Une fois dans le container executer cette commande :
+  Une fois dans le container executer cette commande vous devez remplacer<ADRESSE_IP> par une adresse IP valide exemple 192.168.0.1:
   ```bash
-  openssl req -x509 -newkey rsa:4096 -nodes -out /app/certificats/cert.pem -keyout /app/certificats/key.pem -days 365 \
-    -subj "/C=FR/ST=State/L=Paris/O=geovoice/CN=localhost"
+  mkcert -install
+  mkcert -key-file key.pem -cert-file cert.pem localhost <ADRESSE_IP>
+  cd /usr/local/share/ca-certificates
+  
+  # La commande cp va copier le certificat au du projet il faut vérifier son nom donc d'abord fait un  ls -la et remplacer si jamais le nom du fichier
+
+  cp mkcert_development_CA_178928495699523639395873563568737777600.crt /app/
   ```
   Cela va créer les clés SSL pour que l application puisse tourner en HTTPS
 
+  Après faudra aller sur le navigateur que vous utiliser pour développement :
+
+    <b>Firefox</b> :
+    - Ouvrez Firefox et accédez à "Préférences" ou "Options".
+    - Dans le menu latéral, sélectionnez "Vie privée et sécurité".
+    - Faites défiler jusqu'à la section "Certificats" et cliquez sur "Afficher les certificats".
+    - Dans l'onglet "Autorités", cliquez sur "Importer".
+    - Sélectionnez le fichier du certificat racine de l'autorité de certification locale que vous avez généré avec mkcert.
+    - Suivez les instructions à l'écran pour importer le certificat.
+    - Redémarrez Firefox.
+
+  <b>Chrome</b> :
+  - Ouvrez Chrome et accédez à "Paramètres" à partir du menu (trois points verticaux en haut à droite).
+  - Développez la section "Avancé" (peut être sous "Avancé").
+  - Sous "Confidentialité et sécurité", sélectionnez "Gérer les certificats".
+  - Dans l'onglet "Autorités de certification racines", cliquez sur "Importer".
+  - Sélectionnez le fichier du certificat racine de l'autorité de certification locale que vous avez généré avec mkcert.
+  - Suivez les instructions à l'écran pour importer le certificat.
+  - Redémarrez Chrome.
+
+  Vous pouvez aussi ajouter le certificat sur vos téléphone.
+
   Une fois la commande exécuté arrêter les différents conteneur et relancer la commande qui se trouve <b>"Start le container"</b>. L'application normalement va être lancé en HTTPS pour la partie Back.
+
+  Il faudra faire l'inverse dans le DockerFile.dev car il faut que le container se lance avec cette commande :
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--cert", "/app/cert.pem", "--key", "/app/key.pem"]
+
 
 ## Commandes Docker Back
 ```bash
@@ -116,6 +154,8 @@ ifconfig
 <li>
   N'oubliez pas de mettre à jour également cette adresse IP dans le fichier environment.development.ts, en gardent le même port utilisé précédemment en local.
 </li>
+
+Il faudra copier le dossier "certificats" qui se trouve dans la partie back car cela va permettre au server  HTTPS de fonctionner.
 
 ## Commandes Docker Front
 

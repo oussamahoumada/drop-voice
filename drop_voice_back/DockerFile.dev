@@ -14,8 +14,15 @@ RUN python3 -m pip install --upgrade pip virtualenv \
 RUN pip install -r requirements.txt \
     && pip cache purge
 
-RUN . .venv/bin/activate && openssl req -x509 -newkey rsa:4096 -nodes -out /app/certificats/cert.pem -keyout /app/certificats/key.pem -days 365 \
-    -subj "/C=FR/ST=State/L=Paris/O=geovoice/CN=localhost"
+RUN apt update \
+    && apt-get install libnss3 -y \
+    && curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64" \
+    && chmod +x mkcert-v*-linux-amd64 \
+    && cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+    # && mkcert -install \
+    # && mkcert -key-file key.pem -cert-file cert.pem localhost 172.20.10.3 192.168.0.114
+    # && mkcert -key-file key.pem -cert-file cert.pem drop-dev.com *.drop-dev.com localhost 172.20.10.3 192.168.0.114 127.0.0.1 ::1
+    # mkcert -CAROOT
 
 ENV FLASK_APP=app
 ENV FLASK_DEBUG=1
@@ -24,6 +31,6 @@ ENV FLASK_RUN_HOST=0.0.0.0
 
 EXPOSE 5000
 
-# CMD ["python", "./app/__init__.py"]
 CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--cert", "/app/certificats/cert.pem", "--key", "/app/certificats/key.pem"]
+# CMD ["python", "./app/__init__.py"]
 # CMD ["tail", "-f", "/dev/null"]

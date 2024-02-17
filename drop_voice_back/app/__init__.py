@@ -34,7 +34,6 @@ if os.getenv('ENV') == 'development':
     if is_exist_cert and is_exist_key:
         cert_path = '/app/certificats/cert.pem'
         key_path = '/app/certificats/key.pem'
-        
         context = (cert_path, key_path)
 
         sslify = SSLify(app, permanent=True)
