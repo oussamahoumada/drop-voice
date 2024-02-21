@@ -1,9 +1,10 @@
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { SwaleEnum } from 'src/app/enum/swale-enum';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
     email: new FormControl(null, [Validators.required, Validators.email]),
   });
 
-  authentication() {
+  authentication(): void
+  {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
@@ -33,20 +35,21 @@ export class LoginComponent {
 
             this.cookieService.set('token', response.user.idToken, dateExpiration);
             this.cookieService.set('id', response.id);
-            console.log(response)
-            Swal.fire('Success', 'login Success', 'success');
+
+            Swal.fire(SwaleEnum.successFrench, 'Connexion réussi', SwaleEnum.success);
             this.router.navigateByUrl('/home');
           } else {
-            Swal.fire('warning', 'mail/passWord incorrect', 'warning');
+            Swal.fire(SwaleEnum.warningFrench, 'Email ou mot de passe incorrecte', SwaleEnum.warning);
           }
         },
         error: (error: any) => {
-          alert(JSON.stringify(error));
-          Swal.fire('error', 'Somethng wints wrong', 'error');
+          const errorMessageToShow: string = error.error.message + ' email ou mot de passe incorrecte'
+
+          Swal.fire(SwaleEnum.errorServer, error.error.message ? errorMessageToShow : 'Une erreur est survenue', SwaleEnum.error);
         }
       });
     } else {
-      Swal.fire('warning', 'all fields are required', 'warning');
+      Swal.fire(SwaleEnum.warningFrench, 'Veuillez remplir tous les champs', SwaleEnum.warning);
     }
   }
 }

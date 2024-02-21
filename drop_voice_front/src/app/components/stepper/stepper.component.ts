@@ -1,5 +1,7 @@
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { SwaleEnum } from 'src/app/enum/swale-enum';
 import { MapService } from 'src/app/services/map.service';
 import { getCurrentDate } from 'src/app/helpers/date_formatter';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -38,7 +40,8 @@ export class StepperComponent implements OnInit {
     private mapService: MapService,
     private themeService: ThemeApiService,
     private dropService: DropDataService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +111,7 @@ export class StepperComponent implements OnInit {
     });
   }
 
-  public submitForm(): void {
+  public submitForm() : void {
     if (this.audioForm.valid) {
       this.mapService.getCurrentPosition().subscribe((map: { latitude: any; longitude: any; }) => {
         this.audioForm.patchValue({ latitude: map.latitude });
@@ -119,15 +122,19 @@ export class StepperComponent implements OnInit {
           .subscribe({
             next: (response: string) => {
               if (response === 'success') {
-                Swal.fire('Success', 'Votre enregistrement à été bien sauvegardé', 'success');
+                Swal.fire(SwaleEnum.successFrench, 'Votre enregistrement à été bien sauvegardé', SwaleEnum.success);
+                this.router.navigateByUrl('/home');
               } else {
-                Swal.fire('error', 'Une erreur est survenue', 'error');
+                Swal.fire(SwaleEnum.errorServer, 'Une erreur est survenue', SwaleEnum.error);
               }
+            },
+            error: (error: any) => {
+              Swal.fire(SwaleEnum.errorServer, error.message ?? `Erreur de serveur !`, SwaleEnum.error);
             }
-          });
-      });
+        });
+      })
     } else {
-      alert('Veuillez remplir le formulaire');
+      Swal.fire(SwaleEnum.warningFrench, 'Veuillez remplir le formulaire !', SwaleEnum.error);
     }
   }
 }

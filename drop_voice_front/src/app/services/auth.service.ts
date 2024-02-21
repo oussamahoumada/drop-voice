@@ -1,10 +1,11 @@
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 import { corsHeaders } from 'src/app/cors_validation/corsValidation';
 import { UrlGeneratorService } from './url-generator.service';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { SwaleEnum } from '../enum/swale-enum';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private urlService: UrlGeneratorService,
-    private router: Router,
     private cookieService: CookieService
   ) {
   }
@@ -62,16 +62,12 @@ export class AuthService {
 
     response.subscribe({
       next: (success: any) => {
-        console.log(success)
-        
         if (success.success) {
           this.cookieService.deleteAll();
-          this.router.navigateByUrl('');
         }
       },
       error: (error: any) => {
-        console.error(error)
-        alert('Une erreur du serveur est survenu')
+        Swal.fire(SwaleEnum.errorServer, error.error.message ?? 'Une erreur est survenue' , SwaleEnum.error);
       }
     })
   }

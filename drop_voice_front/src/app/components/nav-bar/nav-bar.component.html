@@ -18,11 +18,11 @@
     </button>
     <button *ngIf="authService.isLogged()" mat-menu-item (click)="handleLogout()">
       <mat-icon>logout</mat-icon>
-        Logout
+        Se déconnecter
     </button>
     <button *ngIf="!authService.isLogged()" mat-menu-item [routerLink]="['/login']">
       <mat-icon>login</mat-icon>
-        Login
+        Se connecter
     </button>
   </mat-menu>
 </div>

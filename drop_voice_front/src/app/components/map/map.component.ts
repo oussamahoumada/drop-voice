@@ -1,13 +1,14 @@
+import Swal from 'sweetalert2';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { environment } from '../../../environments/environment';
 import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
 import { DropData } from 'src/app/interfaces/drop/drop-interface';
 import { CookieService } from 'ngx-cookie-service';
+import { SwaleEnum } from 'src/app/enum/swale-enum';
 
 @Component({
   selector: 'app-map',
@@ -31,20 +32,19 @@ export class MapComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {}
 
-  public ngAfterViewInit(): void {
+  public ngAfterViewInit(): void
+  {
     this.loadMap();
-    const univP8 = {
-      latitude: 48.94492,
-      longitude: 2.36424,
-    };
     this.getUserRecords();
   }
 
-  handleMarkerClick(dropData: DropData) {
+  handleMarkerClick(dropData: DropData): void
+  {
     this.dialog.open(MyCardComponent, { data: dropData });
   }
 
-  private initialiseMarkers() {
+  private initialiseMarkers(): void
+  {
     const that = this;
     this.dropsData.forEach((element) => {
       const userIcon = L.icon({
@@ -94,14 +94,8 @@ export class MapComponent implements AfterViewInit, OnInit {
           this.currentPositionMarker = L.marker([latitude, longitude], {
             icon,
           })
-            .bindPopup('My position')
+            .bindPopup('Ma position')
             .addTo(this.map);
-          console.log(
-            'Position updated => longitude : ',
-            longitude,
-            ' latitude : ',
-            latitude
-          );
         },
         (err) => console.log(err),
         {
@@ -133,7 +127,7 @@ export class MapComponent implements AfterViewInit, OnInit {
         this.initialiseMarkers();
       },
       error: () => {
-        alert('Une erreur est survenu');
+        Swal.fire(SwaleEnum.errorServer, 'Une erreur est survenue.', SwaleEnum.error);
       },
     });
   }
