@@ -1,15 +1,13 @@
+import Swal from 'sweetalert2';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import * as L from 'leaflet';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../../environments/environment';
 import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
 import { DropData } from 'src/app/interfaces/drop/drop-interface';
 import { CookieService } from 'ngx-cookie-service';
-
-
-
+import { SwaleEnum } from 'src/app/enum/swale-enum';
 
 @Component({
   selector: 'app-map',
@@ -35,22 +33,20 @@ export class MapComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {}
 
-  public ngAfterViewInit(): void {
+  public ngAfterViewInit(): void
+  {
     this.loadMap();
-    const univP8 = {
-      latitude: 48.94492,
-      longitude: 2.36424,
-    };
     this.getUserRecords();
   }
 
-  handleMarkerClick(dropData: DropData) {
+  handleMarkerClick(dropData: DropData): void
+  {
     this.dialog.open(MyCardComponent, { data: dropData });
   }
 
-  private initialiseMarkers() {
+  private initialiseMarkers(): void
+  {
     const that = this;
-    console.log('je suis la ', this.dropsData);
     this.dropsData.forEach((element) => {
       const userIcon = L.icon({
         iconUrl: '../../../assets/images/my-marker.png',
@@ -69,7 +65,7 @@ export class MapComponent implements AfterViewInit, OnInit {
           : generalIcon;
       const marker = L.marker([element.latitude, element.longitude], {
         icon,
-      }).on('click', function (e) {
+      }).on('click', function () {
         that.handleMarkerClick(element);
       });
       marker.addTo(this.map);
@@ -86,7 +82,6 @@ export class MapComponent implements AfterViewInit, OnInit {
         (position: any) => {
           const longitude = position.coords.longitude;
           const latitude = position.coords.latitude;
-          console.log(position);
           const icon = L.icon({
             iconUrl: '../../../assets/images/man.png',
             shadowUrl: '../../../assets/images/marker-shadow.png',
@@ -100,14 +95,8 @@ export class MapComponent implements AfterViewInit, OnInit {
           this.currentPositionMarker = L.marker([latitude, longitude], {
             icon,
           })
-            .bindPopup('My position')
+            .bindPopup('Ma position')
             .addTo(this.map);
-          console.log(
-            'Position updated => longitude : ',
-            longitude,
-            ' latitude : ',
-            latitude
-          );
           const userPosition = L.latLng(latitude, longitude);
           let isAudioPlaying = false;
 
@@ -147,7 +136,7 @@ export class MapComponent implements AfterViewInit, OnInit {
         this.initialiseMarkers();
       },
       error: () => {
-        alert('Une erreur est survenu');
+        Swal.fire(SwaleEnum.errorServer, 'Une erreur est survenue.', SwaleEnum.error);
       },
     });
   }
@@ -167,35 +156,12 @@ export class MapComponent implements AfterViewInit, OnInit {
         accessToken: environment.mapbox.accessToken,
       }
     ).addTo(this.map);
-    /*
-    const drawnItems = new L.FeatureGroup();
-    this.map.addLayer(drawnItems);
-  
-    // Add the Leaflet Draw control
-    const drawControl = new L.Control.Draw({
-      edit: {
-        featureGroup: drawnItems,
-      },
-    });
-    this.map.addControl(drawControl);
-  
-    const that = this;
-    setInterval(function () {
-      that.displayCurrentPosition();
-    }, 5000); 
-*/
   }
 
-  
   private async startAudioAtLocalisation(isAudioPlaying: boolean, distance: number, element: DropData): Promise<void> {
     const isAlreadyStarted = this.dropStarted.includes(element.drop_id);
   
-    if (!isAudioPlaying && distance < 5
-      
-      
-      
-      
-  ) {
+    if (!isAudioPlaying && distance < 5) {
       // Check if the drop hasn't started yet
       if (!isAlreadyStarted) {
         isAudioPlaying = true;

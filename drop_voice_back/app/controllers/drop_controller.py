@@ -1,13 +1,13 @@
 import os
 import base64
 from flask_restx import Resource, Namespace
-from sqlalchemy import and_, delete
+from sqlalchemy import and_, delete, desc
 
-from extensions import db
-from models.models import drop, precise_adress
-from services.cloud_storage import add_to_dropbox, get_image_url
-from models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
-from models.models import User
+from ..extensions import db
+from ..models.models import drop, precise_adress
+from ..services.cloud_storage import add_to_dropbox, get_image_url
+from ..models.drop.drop_api_model import drop_input_model, get_all_drop_model, drop_delete_model
+from ..models.models import User
 
 drop_ns = Namespace("drop/")
 
@@ -76,10 +76,10 @@ class DropAPI(Resource):
 @drop_ns.route("/user/<int:user_id>")
 class DropAPI(Resource):
     @drop_ns.marshal_list_with(get_all_drop_model)
-    def get(self, user_id) -> drop:
+    def get(self, user_id: int) -> drop:
         user: User = User.query.get(user_id)
 
-        return drop.query.filter_by(_user=user).all()
+        return drop.query.filter_by(_user=user).order_by(desc(drop.drop_id)).all()
 
 def upload(file, name):
     _, encoded_data = file.split(',', 1)
