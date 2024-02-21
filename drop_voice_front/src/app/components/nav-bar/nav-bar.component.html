@@ -16,6 +16,10 @@
       <mat-icon>place</mat-icon>
         Map
     </button>
+    <button *ngIf="!authService.isLogged()" mat-menu-item [routerLink]="['/']">
+      <mat-icon>place</mat-icon>
+        Map
+    </button>
     <button *ngIf="authService.isLogged()" mat-menu-item (click)="handleLogout()">
       <mat-icon>logout</mat-icon>
         Se déconnecter
