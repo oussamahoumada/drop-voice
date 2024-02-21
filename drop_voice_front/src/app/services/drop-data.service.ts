@@ -34,6 +34,7 @@ export class DropDataService {
   public getAllDrops(): Observable<any> {
     const url: string = this.urlService.getUrl('/drop/get_all_drops');
     const response = this.http.get(url, { headers: corsHeaders });
+
     return response;
   }
 

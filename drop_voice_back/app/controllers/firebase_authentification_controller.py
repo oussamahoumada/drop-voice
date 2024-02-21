@@ -43,7 +43,7 @@ class FirebaseAuthentificationRegistration(Resource):
         except Exception as e:
             content: dict = {
                 'success': False,
-                'message': 'Erreur lors de la création du compte avec l\'email ' + email,
+                'message': 'Erreur lors de la création du compte avec l\'email ' + email + ' ce compte existe déjà.',
                 'error': str(e),
             }
             code: int = 403

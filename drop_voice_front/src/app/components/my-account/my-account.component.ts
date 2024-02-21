@@ -1,6 +1,8 @@
+import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { UserInterface } from 'src/app/interfaces/user/user-interface';
 import { UserService } from 'src/app/services/user.service';
+import { SwaleEnum } from 'src/app/enum/swale-enum';
 
 @Component({
   selector: 'app-my-account',
@@ -27,7 +29,7 @@ export class MyAccountComponent implements OnInit {
       },
       error: (error: any) => {
         console.error(error)
-        alert('Une erreur server est survenue')
+        Swal.fire(SwaleEnum.errorServer, 'Une erreur est survenue', SwaleEnum.error);
       }
     })
   }

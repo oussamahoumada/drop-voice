@@ -1,16 +1,9 @@
-/* #map {
-  height: 600px;
-  width: 300%;
-  min-width: 600px;
-} */
-
 .map-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  /* margin: 20px; */
 }
 
 .map-border {
@@ -20,5 +13,4 @@
 
 #map {
   height: 100%;
-  /* min-height: 900px; */
 }
