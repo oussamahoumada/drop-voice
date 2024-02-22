@@ -73,7 +73,7 @@ export class MapComponent implements AfterViewInit, OnInit {
       setInterval(function () {
         that.displayCurrentPosition();
       }, 5000);
-    });  
+    });
   }
 
   private async displayCurrentPosition(): Promise<any> {
@@ -85,7 +85,7 @@ export class MapComponent implements AfterViewInit, OnInit {
           const icon = L.icon({
             iconUrl: '../../../assets/images/man.png',
             shadowUrl: '../../../assets/images/marker-shadow.png',
-          });          
+          });
           if (this.currentPositionMarker) {
             this.currentPositionMarker.remove();
           } else {
