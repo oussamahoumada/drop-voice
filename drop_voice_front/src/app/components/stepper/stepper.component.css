@@ -1,9 +1,9 @@
 .mat-stepper-horizontal {
     margin-top: 1%;
 }
-  
+
 .mat-mdc-form-field {
-    margin-top: 16px;
+    margin-top: 2%;
 }
 
 .center-content {
@@ -43,4 +43,13 @@ mat-toolbar {
     to {
         transform: scale(1.1);
     }
+}
+.mat-stepper-horizontal {
+    margin-top: 1%;
+}
+  
+.mat-step {
+    fxFlex: auto; /* Ajuste la hauteur en fonction du contenu */
+    padding: 16px; /* Ajoute un rembourrage pour l'espace intérieur */
+    box-sizing: border-box; /* Assurez-vous que le rembourrage est inclus dans la hauteur totale */
 }
