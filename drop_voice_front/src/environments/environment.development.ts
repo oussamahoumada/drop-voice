@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   // apiUrl: 'https://localhost:5000',
-  // apiUrl: 'https://172.20.10.3:5000',
+  // apiUrl: 'https://192.168.76.158:5000',
   apiUrl: 'https://192.168.0.114:5000',
   mapbox: {
     accessToken:

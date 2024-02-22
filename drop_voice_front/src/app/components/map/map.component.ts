@@ -2,7 +2,6 @@ import Swal from 'sweetalert2';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { MatDialog } from '@angular/material/dialog';
-
 import { environment } from '../../../environments/environment';
 import { MyCardComponent } from '../my-card/my-card.component';
 import { DropDataService } from 'src/app/services/drop-data.service';
@@ -15,11 +14,13 @@ import { SwaleEnum } from 'src/app/enum/swale-enum';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
+
 export class MapComponent implements AfterViewInit, OnInit {
   [x: string]: any;
   map: any;
   dropsData: DropData[] = [];
   currentPositionMarker: any;
+  private dropStarted: number[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -64,7 +65,7 @@ export class MapComponent implements AfterViewInit, OnInit {
           : generalIcon;
       const marker = L.marker([element.latitude, element.longitude], {
         icon,
-      }).on('click', function (e) {
+      }).on('click', function () {
         that.handleMarkerClick(element);
       });
       marker.addTo(this.map);
@@ -75,7 +76,7 @@ export class MapComponent implements AfterViewInit, OnInit {
     });
   }
 
-  private displayCurrentPosition(): any {
+  private async displayCurrentPosition(): Promise<any> {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: any) => {
@@ -96,11 +97,20 @@ export class MapComponent implements AfterViewInit, OnInit {
           })
             .bindPopup('Ma position')
             .addTo(this.map);
+          const userPosition = L.latLng(latitude, longitude);
+          let isAudioPlaying: boolean = false;
+
+          this.dropsData.forEach(async (drop: DropData) => {
+            const dropPosition = L.latLng(drop.latitude, drop.longitude);
+            const distance: number = userPosition.distanceTo(dropPosition);
+
+            this.startAudioAtLocalisation(isAudioPlaying, distance, drop)
+          });
         },
         (err) => console.log(err),
         {
           enableHighAccuracy: true,
-          timeout: 5000,
+          timeout: 1000,
           maximumAge: 0,
         }
       );
@@ -140,12 +150,42 @@ export class MapComponent implements AfterViewInit, OnInit {
       {
         attribution:
           'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
+        maxZoom: 100,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
         accessToken: environment.mapbox.accessToken,
       }
     ).addTo(this.map);
+  }
+
+  private async startAudioAtLocalisation(isAudioPlaying: boolean, distance: number, drop: DropData): Promise<void>
+  {
+    const isAlreadyStarted: boolean = this.dropStarted.includes(drop.drop_id);
+
+    if (!isAudioPlaying && distance < 5) {
+      // Check if the drop hasn't started yet
+      if (!isAlreadyStarted) {
+        isAudioPlaying = true;
+        const audio = new Audio(drop.audio_url);
+  
+        // Mark the drop as started
+        this.dropStarted.push(drop.drop_id);
+  
+        // Event listener to set isAudioPlaying to false when audio ends
+        audio.addEventListener('ended', () => {
+          isAudioPlaying = false;
+        });
+  
+        try {
+          await audio.play();
+        } catch (error) {
+          console.error('Audio playback error:', error);
+        }
+      } else {
+        // If the drop has already started, update isAudioPlaying to false
+        isAudioPlaying = false;
+      }
+    }
   }
 }

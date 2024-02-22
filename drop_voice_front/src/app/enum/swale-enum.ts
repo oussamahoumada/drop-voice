@@ -3,6 +3,6 @@ export enum SwaleEnum {
   warning = 'warning',
   error = 'error',
   warningFrench = 'Attention',
-  errorServer = 'Oupss',
+  errorServer = 'Erreur',
   successFrench = 'Parfait'
 }
