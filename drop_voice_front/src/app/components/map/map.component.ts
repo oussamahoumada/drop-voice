@@ -98,13 +98,14 @@ export class MapComponent implements AfterViewInit, OnInit {
             .bindPopup('Ma position')
             .addTo(this.map);
           const userPosition = L.latLng(latitude, longitude);
-          let isAudioPlaying = false;
+          let isAudioPlaying: boolean = false;
 
-          this.dropsData.forEach(async(element: DropData) => {
-            const dropPosition = L.latLng(element.latitude, element.longitude);
-            const distance = userPosition.distanceTo(dropPosition);
-            this.startAudioAtLocalisation(isAudioPlaying, distance, element)
-            });
+          this.dropsData.forEach(async (drop: DropData) => {
+            const dropPosition = L.latLng(drop.latitude, drop.longitude);
+            const distance: number = userPosition.distanceTo(dropPosition);
+
+            this.startAudioAtLocalisation(isAudioPlaying, distance, drop)
+          });
         },
         (err) => console.log(err),
         {
@@ -158,24 +159,24 @@ export class MapComponent implements AfterViewInit, OnInit {
     ).addTo(this.map);
   }
 
-  private async startAudioAtLocalisation(isAudioPlaying: boolean, distance: number, element: DropData): Promise<void> {
-    const isAlreadyStarted = this.dropStarted.includes(element.drop_id);
-  
+  private async startAudioAtLocalisation(isAudioPlaying: boolean, distance: number, drop: DropData): Promise<void>
+  {
+    const isAlreadyStarted: boolean = this.dropStarted.includes(drop.drop_id);
+
     if (!isAudioPlaying && distance < 5) {
       // Check if the drop hasn't started yet
       if (!isAlreadyStarted) {
         isAudioPlaying = true;
-        const audio = new Audio(element.audio_url);
+        const audio = new Audio(drop.audio_url);
   
         // Mark the drop as started
-        this.dropStarted.push(element.drop_id);
+        this.dropStarted.push(drop.drop_id);
   
         // Event listener to set isAudioPlaying to false when audio ends
         audio.addEventListener('ended', () => {
           isAudioPlaying = false;
         });
   
-        // Play the audio and handle errors
         try {
           await audio.play();
         } catch (error) {
