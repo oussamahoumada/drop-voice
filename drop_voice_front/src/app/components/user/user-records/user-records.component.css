@@ -27,3 +27,13 @@ img {
 .nav mat-grid-tile {
   background: rgb(53, 46, 46);
 }
+
+#spinner {
+  top: 60%;
+  left: 60%;
+  width: 30em;
+  height: 18em;
+  position: fixed;
+  margin-top: -9em;
+  margin-left: -15em;
+}
