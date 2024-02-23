@@ -6,7 +6,7 @@ __pycache__
 .env
 certificats
 config-firebase-admin.json
-mkcert_development_CA_178928495699523639395873563568737777600.crt
+*.crt
 rootCA-key.pem
 rootCA.pem
 
