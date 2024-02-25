@@ -54,9 +54,9 @@ export class StepperComponent implements OnInit {
     audio_url: ['audio.mp3', Validators.required],
     audio: ['', Validators.required],
     title: ['', Validators.required],
-    theme: ['', Validators.required],
-    image_url: ['image.jpg', Validators.required],
-    image: ['', Validators.required],
+    theme: [''],
+    image_url: ['image.jpg'],
+    image: [''],
     date: [getCurrentDate(), Validators.required],
     latitude: [''],
     longitude: [''],
@@ -136,5 +136,9 @@ export class StepperComponent implements OnInit {
     } else {
       Swal.fire(SwaleEnum.warningFrench, 'Veuillez remplir le formulaire !', SwaleEnum.error);
     }
+  }
+
+  test(){
+    console.log(this.audioForm);
   }
 }
