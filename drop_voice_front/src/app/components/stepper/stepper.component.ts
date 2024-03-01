@@ -137,8 +137,4 @@ export class StepperComponent implements OnInit {
       Swal.fire(SwaleEnum.warningFrench, 'Veuillez remplir le formulaire !', SwaleEnum.error);
     }
   }
-
-  test(){
-    console.log(this.audioForm);
-  }
 }

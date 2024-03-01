@@ -15,14 +15,14 @@ drop_ns = Namespace("drop/")
 class DropAPI(Resource):   
     @drop_ns.expect(drop_input_model)
     def post(self):
-
+        
+        image_url_from_dp = ""
+        
         image = drop_ns.payload['image']
         image_url = drop_ns.payload['image_url']
         if(image != "" and image_url != "") :
             upload(image, image_url)
-            image_url_from_dp = get_image_url(image_url)
-        else:
-            image_url_from_dp = ""
+            image_url_from_dp = get_image_url(image_url)  
 
         audio = drop_ns.payload['audio']
         audio_url = drop_ns.payload['audio_url']

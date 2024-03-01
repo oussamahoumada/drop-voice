@@ -10,5 +10,6 @@ export class MyCardComponent {
   dropData;
   constructor(@Inject(MAT_DIALOG_DATA) data: any) {
     this.dropData = data;
+    console.log(this.dropData);
   }
 }
