@@ -3,18 +3,29 @@
         <h1 class="title-page">Mes enregistrements</h1>
         <div layout-align="center" *ngFor="let drop of dropsData">
             <mat-card id="{{ drop.drop_id }}" class="card">
+                <img mat-card-image [src]="drop.image_url" alt="{{ drop.title }}" *ngIf="drop.image_url != ''"/>
                 <mat-card-header>
-                    <mat-card-title>{{ drop.title }}</mat-card-title>
+                    <mat-card-title> Titre : {{ drop.title }}</mat-card-title>
+                    <mat-card-title> Thème : {{ drop.ref_theme }} </mat-card-title>
                 </mat-card-header>
-                <mat-card-content>
-                    <img mat-card-image [src]="drop.image_url" alt="Photo" />
-                    <h4>Le thème : {{ drop.ref_theme }}</h4>
+                <mat-card-actions
+                    style="
+                    align-content: center;
+                    text-align: center;
+                    display: block;
+                    margin-top: 20px;
+                    "
+                >
                     <app-lecteur-audio [audioUrl]="drop.audio_url"></app-lecteur-audio>
                     <button mat-mini-fab color="warn" aria-label="Supprimer l'enregistrement" (click)="openConfirmationDialog(drop)">
                         <mat-icon>delete</mat-icon>
                     </button>
-                </mat-card-content>
+                </mat-card-actions>
             </mat-card>
         </div>
     </div>
+</div>
+
+<div id="spinner" *ngIf="shouldSpinnerStart">
+    <mat-spinner></mat-spinner>
 </div>

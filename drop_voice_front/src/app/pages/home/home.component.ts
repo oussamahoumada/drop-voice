@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
-
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   public isLogged: boolean = false;
   public urlFront: string;
 
-  public constructor(private authService: AuthService) {
+  public constructor(private authService: AuthService, private router: Router) {
     this.urlFront = environment.apiUrl;
   }
 
@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   public toggleStepperComponent(): void {
     if (this.authService.isLogged()) {
       this.isStepperVisible = !this.isStepperVisible;
+    }else{
+      this.router.navigate(["login"]);
     }
   }
 }

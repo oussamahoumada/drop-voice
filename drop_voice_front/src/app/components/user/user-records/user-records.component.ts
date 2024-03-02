@@ -14,6 +14,7 @@ import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.comp
 })
 export class UserRecordsComponent implements OnInit {
   public dropsData: DropData[] = [];
+  public shouldSpinnerStart:boolean = false;
 
   public constructor (
     private dropService: DropDataService,
@@ -36,12 +37,17 @@ export class UserRecordsComponent implements OnInit {
   }
 
   private getUserRecords() {
+
+    this.shouldSpinnerStart = true;
+
     this.dropService.getDropsByUser().subscribe({
       next: (data: DropData[]) => {
         this.dropsData = data;
+        this.shouldSpinnerStart = false;
       },
       error: () => {
         Swal.fire(SwaleEnum.errorServer, 'Une erreur est survenue.', SwaleEnum.error);
+        this.shouldSpinnerStart = false;
       }
     })
   }
