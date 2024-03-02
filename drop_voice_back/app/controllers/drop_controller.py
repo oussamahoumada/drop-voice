@@ -17,7 +17,7 @@ class DropAPI(Resource):
     def post(self):
         
         image_url_from_dp = ""
-        
+
         image = drop_ns.payload['image']
         image_url = drop_ns.payload['image_url']
         if(image != "" and image_url != "") :
