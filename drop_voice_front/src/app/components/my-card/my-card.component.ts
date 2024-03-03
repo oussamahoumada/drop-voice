@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DropData } from 'src/app/interfaces/drop/drop-interface';
 
 @Component({
   selector: 'app-my-card',
@@ -7,8 +8,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./my-card.component.css'],
 })
 export class MyCardComponent {
-  dropData;
-  constructor(@Inject(MAT_DIALOG_DATA) data: any) {
+  public dropData: DropData;
+
+  constructor(@Inject(MAT_DIALOG_DATA) data: DropData) {
     this.dropData = data;
   }
 }

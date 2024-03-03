@@ -15,8 +15,14 @@ drop_ns = Namespace("drop/")
 class DropAPI(Resource):   
     @drop_ns.expect(drop_input_model)
     def post(self):
+        
+        image_url_from_dp = ""
+
         image = drop_ns.payload['image']
         image_url = drop_ns.payload['image_url']
+        if(image != "" and image_url != "") :
+            upload(image, image_url)
+            image_url_from_dp = get_image_url(image_url)  
 
         audio = drop_ns.payload['audio']
         audio_url = drop_ns.payload['audio_url']
@@ -24,7 +30,6 @@ class DropAPI(Resource):
         long = drop_ns.payload['longitude']
         lat = drop_ns.payload['latitude']
 
-        upload(image, image_url)
         upload(audio, audio_url)
         
         new_address = precise_adress(
@@ -40,7 +45,6 @@ class DropAPI(Resource):
         
         pa_id = req.first().precise_adress_id
         
-        image_url_from_dp = get_image_url(image_url)
         audio_url_from_dp = get_image_url(audio_url)
 
         dr = drop(

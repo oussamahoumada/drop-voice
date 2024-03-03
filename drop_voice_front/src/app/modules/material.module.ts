@@ -14,6 +14,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const materials: any = [
   MatMenuModule,
@@ -35,6 +36,7 @@ const materials: any = [
   MatFormFieldModule,
   MatInputModule,
   MatToolbarModule,
+  MatProgressSpinnerModule,
 ];
 @NgModule({
   imports: [materials],

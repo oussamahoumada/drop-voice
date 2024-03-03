@@ -14,11 +14,6 @@ mat-card-content {
   text-align: center;
 }
 
-img {
-  max-width: 60%;
-  width: 40%;
-}
-
 .title-page {
   margin-top: 5%;
   text-align: center;
@@ -26,4 +21,12 @@ img {
 
 .nav mat-grid-tile {
   background: rgb(53, 46, 46);
+}
+
+#spinner {
+  position: fixed;
+  z-index: 1031;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
