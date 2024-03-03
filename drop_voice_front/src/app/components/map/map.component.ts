@@ -151,7 +151,7 @@ export class MapComponent implements AfterViewInit, OnInit {
       {
         attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>',      
-        maxZoom: 100
+        maxZoom: 100,
         tileSize: 512,
         zoomOffset: -1,
       }
