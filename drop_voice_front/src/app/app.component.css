@@ -1,16 +1,20 @@
 .nav mat-grid-tile {
-  background-color: rgb(53, 46, 46);
+  background-color: hwb(233 12% 75%);
 }
 
 h1 {
   font-weight: bold;
   position: absolute;
-  left: 10%;
-  color: #c76b36;
+  left: 25%;
+  color: #ffffff;
   margin-bottom: auto;
 }
 
 app-nav-bar {
   position: absolute;
-  right: 5%
+  right: 2%
+}
+.logo {
+  max-width: 80%;
+  max-height: 80%
 }

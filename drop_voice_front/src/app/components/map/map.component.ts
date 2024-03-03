@@ -50,12 +50,13 @@ export class MapComponent implements AfterViewInit, OnInit {
     this.dropsData.forEach((element) => {
       const userIcon = L.icon({
         iconUrl: '../../../assets/images/my-marker.png',
-        shadowUrl: '../../../assets/images/marker-shadow.png',
+        iconSize: [30,46],
+
         popupAnchor: [13, 0],
       });
       const generalIcon = L.icon({
         iconUrl: '../../../assets/images/marker-icon.png',
-        shadowUrl: '../../../assets/images/marker-shadow.png',
+        iconSize: [30,46],
         popupAnchor: [13, 0],
       });
 
@@ -146,10 +147,10 @@ export class MapComponent implements AfterViewInit, OnInit {
   private loadMap(): void {
     this.map = L.map('map').setView([0, 0], 2);
     L.tileLayer(
-      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+      'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
       {
         attribution:
-          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>',      
         maxZoom: 100,
         id: 'mapbox/streets-v11',
         tileSize: 512,
