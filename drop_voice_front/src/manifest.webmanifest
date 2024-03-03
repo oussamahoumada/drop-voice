@@ -1,8 +1,8 @@
 {
-  "name": "GeoVoice",
-  "short_name": "GeoVoice",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "DropVoice",
+  "short_name": "Drop",
+  "theme_color": "##1f2240",
+  "background_color": "#1976d2",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

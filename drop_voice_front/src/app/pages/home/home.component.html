@@ -8,37 +8,15 @@
   <app-stepper *ngIf="isStepperVisible"></app-stepper>
 </div>
 
-<!-- Listen + Record  -->
-<mat-grid-list
-  id="bottom-bar"
-  class="features"
-  cols="2"
-  rowHeight="10vh"
-  style="background-color: #c76b36"
-  gutterSize="3px"
->
-  <mat-grid-tile>
-    <button
-      mat-mini-fab
-      [ngStyle]="{ transform: 'scale(1.25)' }"
-      color="basic"
-      (click)="toggleStepperComponent()"
-    >
-      <mat-icon style="margin: 0px; padding: 10; scale: 1; color: #c76b36"
-        >headset</mat-icon
-      >
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <button
-      mat-mini-fab
-      [ngStyle]="{ transform: 'scale(1.25)' }"
-      color="basic"
-      (click)="toggleStepperComponent()"
-    >
-      <mat-icon style="margin: 0; padding: 0; scale: 1; color: #c76b36">
-        mic
-      </mat-icon>
-    </button>
-  </mat-grid-tile>
-</mat-grid-list>
+<!-- record -->
+<div class='record'>
+  <button class="btn"
+    mat-mini-fab
+    [ngStyle]="{ transform: 'scale()' }"
+    color="basic"
+    (click)="toggleStepperComponent()"
+  >
+    <img src="/assets/icons/icon-micro.png" alt="micro"/>
+  </button>
+</div>
+ 
