@@ -73,7 +73,7 @@ export class MapComponent implements AfterViewInit, OnInit {
 
       setInterval(function () {
         that.displayCurrentPosition();
-      }, 5000);
+      }, 700);
     });
   }
 
